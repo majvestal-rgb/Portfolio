@@ -153,7 +153,7 @@ html {
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -174,7 +174,7 @@ body {
   background: var(--bg);
   color: #CECECE;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .page {
@@ -244,21 +244,32 @@ body {
     gap: var(--space-3);
   }
   .brand {
-    white-space: normal;
-    font-size: clamp(2.5rem, 14vw, 5rem);
+    display: block;
+    width: 100%;
     max-width: 100%;
+    white-space: normal;
+    font-size: clamp(2.125rem, 16vw, 90px);
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
   }
   body.is-scrolled .brand {
-    font-size: clamp(2rem, 10vw, 4rem);
+    font-size: clamp(1.25rem, 10vw, 50px);
+  }
+  .nav a {
+    font-size: 1.875rem;
   }
 }
 
 @media (max-width: 480px) {
   .brand {
-    font-size: clamp(1.75rem, 9vw, 2.5rem);
+    font-size: clamp(2.125rem, 16vw, 90px);
   }
   body.is-scrolled .brand {
-    font-size: clamp(1.5rem, 7.5vw, 2rem);
+    font-size: clamp(1.25rem, 10vw, 50px);
+  }
+  .nav a {
+    font-size: 1.75rem;
   }
   .header-intro {
     font-size: clamp(1.125rem, 5.5vw, 1.75rem);
@@ -272,18 +283,22 @@ body {
   }
 }
 
+@media (max-width: 480px) {
+  .site-header-inner {
+    padding-inline: 0;
+  }
+}
+
 .brand {
   color: #CECECE;
   leading-trim: both;
   text-edge: cap;
   font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  font-size: 120px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -3.6px;
-  white-space: nowrap;
   min-width: 0;
   filter: blur(0);
   transition: font-size 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -291,13 +306,22 @@ body {
     filter 0.25s ease;
 }
 
+@media (min-width: 769px) {
+  .brand {
+    font-size: 120px;
+    white-space: nowrap;
+  }
+}
+
 .brand:hover {
   filter: blur(3px);
 }
 
-body.is-scrolled .brand {
-  font-size: 75px;
-  letter-spacing: -2.25px;
+@media (min-width: 769px) {
+  body.is-scrolled .brand {
+    font-size: 75px;
+    letter-spacing: -2.25px;
+  }
 }
 
 body.is-scrolled .nav {
@@ -900,7 +924,7 @@ a.brand {
 
 @media (max-width: 768px) {
   .project-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-6);
   }
 }
@@ -919,6 +943,9 @@ a.brand {
   line-height: normal;
   letter-spacing: -1.08px;
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .project-details {
@@ -932,11 +959,22 @@ a.brand {
   display: flex;
   width: 491px;
   max-width: 100%;
+  min-width: 0;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 10px;
-  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .project-role,
+  .project-contributions,
+  .project-about {
+    width: 100%;
+  }
 }
 
 .project-detail-heading {
@@ -959,6 +997,10 @@ a.brand {
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.05px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .project-about-text {
@@ -972,7 +1014,9 @@ a.brand {
   line-height: 130%;
   letter-spacing: -0.05px;
   overflow-wrap: break-word;
+  word-break: break-word;
   max-width: 100%;
+  min-width: 0;
 }
 
 .project-media {
