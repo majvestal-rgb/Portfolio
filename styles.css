@@ -237,6 +237,15 @@ body {
   box-sizing: border-box;
 }
 
+.header-intro-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.header-intro-link:hover {
+  color: #acd387;
+}
+
 @media (max-width: 768px) {
   .site-header-inner {
     flex-direction: column;
