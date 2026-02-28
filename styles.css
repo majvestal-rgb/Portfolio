@@ -42,6 +42,93 @@
    - 480px: small phone; smaller root font
    Fluid scaling: clamp(), rem, and % used so layout scales between breakpoints. */
 
+/* Password protection */
+.password-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  padding: 1.5rem;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.password-screen.is-unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.password-screen-inner {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.password-screen-label {
+  margin: 0;
+  color: #CECECE;
+  font-family: "Articulat CF", "articulat-cf", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.password-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: "Articulat CF", "articulat-cf", system-ui, sans-serif;
+  font-size: 1rem;
+  color: #CECECE;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.password-input::placeholder {
+  color: #6b6b6b;
+}
+
+.password-input:focus {
+  border-color: #ACD387;
+}
+
+.password-submit {
+  padding: 0.75rem 1.25rem;
+  font-family: "Articulat CF", "articulat-cf", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000;
+  background: #ACD387;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.password-submit:hover {
+  background: #b8d994;
+}
+
+.password-error {
+  margin: 0;
+  color: #e57373;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
 *,
 *::before,
 *::after {
@@ -63,6 +150,11 @@ html {
   html {
     font-size: 14px;
   }
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 html,
@@ -87,14 +179,16 @@ body {
 
 .page {
   min-height: 100vh;
+  min-width: 0;
   display: flex;
   width: 100%;
-  max-width: var(--page-max);
-  padding: clamp(0.72rem, 1.8vw, 1.44rem) clamp(1.08rem, 3.6vw, 3.6rem) clamp(1.44rem, 2.88vw, 2.88rem) clamp(1.08rem, 2.88vw, 2.88rem);
+  max-width: min(100%, var(--page-max));
+  padding: clamp(0.72rem, 1.8vw, 1.44rem) clamp(0.864rem, 2.88vw, 2.88rem) clamp(1.44rem, 2.88vw, 2.88rem) clamp(0.864rem, 2.304vw, 2.304rem);
   flex-direction: column;
   align-items: flex-start;
-  gap: clamp(3.2rem, 8vw, 6rem);
+  gap: 0;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .site-header {
@@ -105,11 +199,15 @@ body {
   background: transparent;
   display: flex;
   width: 100%;
+  min-width: 0;
+  align-self: stretch;
 }
 
 .site-header-inner {
   width: 100%;
-  padding: 0 0 clamp(1.73rem, 4.6vw, 3.24rem);
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
   border-radius: 0;
   border: none;
   background: transparent;
@@ -123,11 +221,47 @@ body {
   mix-blend-mode: difference;
 }
 
+.header-intro {
+  margin: 56px 0 clamp(3.2rem, 8vw, 6rem);
+  color: #AAA;
+  font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -0.33px;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
 @media (max-width: 768px) {
   .site-header-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-3);
+  }
+  .brand {
+    white-space: normal;
+    font-size: clamp(2.5rem, 14vw, 5rem);
+    max-width: 100%;
+  }
+  body.is-scrolled .brand {
+    font-size: clamp(2rem, 10vw, 4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .brand {
+    font-size: clamp(1.75rem, 9vw, 2.5rem);
+  }
+  body.is-scrolled .brand {
+    font-size: clamp(1.5rem, 7.5vw, 2rem);
+  }
+  .header-intro {
+    font-size: clamp(1.125rem, 5.5vw, 1.75rem);
   }
 }
 
@@ -142,13 +276,15 @@ body {
   color: #CECECE;
   leading-trim: both;
   text-edge: cap;
-  font-family: "Fayte", serif;
-  font-size: 156px;
+  font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-size: 120px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: 1.2px;
+  letter-spacing: -3.6px;
   white-space: nowrap;
+  min-width: 0;
   filter: blur(0);
   transition: font-size 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
     letter-spacing 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
@@ -160,8 +296,8 @@ body {
 }
 
 body.is-scrolled .brand {
-  font-size: 97.5px;
-  letter-spacing: 0.75px;
+  font-size: 75px;
+  letter-spacing: -2.25px;
 }
 
 body.is-scrolled .nav {
@@ -183,9 +319,8 @@ body.is-scrolled .nav a {
 
 .nav {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-4);
-  padding-top: 1.75rem;
 }
 
 .nav a {
@@ -733,27 +868,34 @@ a.brand {
   display: flex;
   flex-direction: column;
   gap: clamp(6rem, 15vw, 15rem);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .project-row {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: var(--row-max);
+  max-width: min(100%, var(--row-max));
   padding-top: 2rem;
   align-items: flex-start;
   gap: clamp(3rem, 6vw, 4.5rem);
   margin: 0 auto;
   border-top: 1px solid rgba(255, 255, 255, 0.24);
   overflow: visible;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .project-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr);
   align-items: flex-start;
   gap: clamp(2rem, 5vw, 5rem);
   width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 768px) {
@@ -768,73 +910,69 @@ a.brand {
 }
 
 .project-title {
-  color: #CECECE;
-  font-family: "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
+  color: #AAA;
+  font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  font-size: clamp(1.75rem, 4vw, 3.25rem);
+  font-size: 36px;
   font-style: normal;
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: -1.92px;
+  line-height: normal;
+  letter-spacing: -1.08px;
   margin: 0;
 }
 
 .project-details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+  display: contents;
   min-width: 0;
 }
 
 .project-role,
-.project-contributions {
+.project-contributions,
+.project-about {
   display: flex;
+  width: 491px;
+  max-width: 100%;
   flex-direction: column;
-  gap: 0.25rem;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
 }
 
 .project-detail-heading {
   margin: 0;
-  color: #CECECE;
-  font-family: "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  font-size: 1rem;
+  color: #AAA;
+  font-family: "Forma DJR Text", serif;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .project-detail-value {
   margin: 0;
-  color: #CECECE;
-  font-family: "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
+  color: #F7F7F7;
+  font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  font-size: 1.125rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.05px;
-}
-
-.project-about {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0;
 }
 
 .project-about-text {
   margin: 0;
-  color: #CECECE;
-  font-family: "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
+  color: #F7F7F7;
+  font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  font-size: 1.125rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.05px;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .project-media {
@@ -1006,10 +1144,10 @@ a.brand {
     line-height: 1.4;
   }
   .brand {
-    letter-spacing: 1px;
+    letter-spacing: -2.8px;
   }
   body.is-scrolled .brand {
-    letter-spacing: 0.6px;
+    letter-spacing: -1.8px;
   }
   .info-intro,
   .info-row-heading,
@@ -1041,10 +1179,10 @@ a.brand {
     line-height: 1.42;
   }
   .brand {
-    letter-spacing: 0.8px;
+    letter-spacing: -2.2px;
   }
   body.is-scrolled .brand {
-    letter-spacing: 0.5px;
+    letter-spacing: -1.4px;
   }
   .info-intro,
   .info-row-heading,
@@ -1056,6 +1194,26 @@ a.brand {
     letter-spacing: 0.02em;
     line-height: 1.38;
   }
+}
+
+/* Scroll-in animation: elements fade and move up slightly when they enter view */
+.scroll-in {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .scroll-in.is-visible { opacity: 1; }
 }
 
 a:focus-visible,
