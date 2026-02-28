@@ -1,8 +1,8 @@
-# Maj Vestal – Portfolio
+# Maj Vestal – Portfolio -
 
 Static portfolio site built as an implementation of a Figma design. It uses semantic HTML and modern CSS (no build step required).
 
-## Running locally
+## Running locally 
 
 - **Option 1 – open directly**:  
   Open `index.html` in your browser (e.g. drag the file into Chrome or use an extension like “Live Server” in VS Code/Cursor).
