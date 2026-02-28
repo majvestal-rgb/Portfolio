@@ -155,6 +155,7 @@ html {
 html {
   overflow-x: clip;
   width: 100%;
+  max-width: 100vw;
 }
 
 html,
@@ -175,6 +176,7 @@ body {
   color: #CECECE;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+  max-width: 100vw;
 }
 
 .page {
@@ -182,7 +184,7 @@ body {
   min-width: 0;
   display: flex;
   width: 100%;
-  max-width: min(100%, var(--page-max));
+  max-width: min(100vw, var(--page-max));
   padding: clamp(0.72rem, 1.8vw, 1.44rem) clamp(0.864rem, 2.88vw, 2.88rem) clamp(1.44rem, 2.88vw, 2.88rem) clamp(0.864rem, 2.304vw, 2.304rem);
   flex-direction: column;
   align-items: flex-start;
@@ -989,7 +991,8 @@ a.brand {
 .project-detail-heading {
   margin: 0;
   color: #AAA;
-  font-family: "Forma DJR Text", serif;
+  font-family: "Articulat CF", "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
