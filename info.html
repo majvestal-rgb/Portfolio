@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Info – Maj Vestal</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <div class="site-header">
+        <div class="site-header-inner">
+          <a href="index.html" class="brand brand-wordmark">Maj Vestal</a>
+          <nav class="nav">
+            <a class="nav-link" href="index.html">Work</a>
+            <a class="nav-link nav-active" href="info.html">Info</a>
+          </nav>
+        </div>
+      </div>
+
+      <main class="page-main info-page">
+        <p class="info-intro">
+          Maj is a senior designer based in Brooklyn, NY. They specialize in
+          designing brand systems that translate seamlessly into digital
+          experiences. Detailed case studies are available upon request.
+        </p>
+
+        <div class="info-row">
+          <h2 class="info-row-heading">Contact</h2>
+          <div class="info-row-content">
+            <a href="mailto:maj.v.des@gmail.com" class="info-link">maj.v.des@gmail.com</a><br />
+            <a href="tel:+12068536672" class="info-link">+1(206)8536672</a><br />
+            <a href="#" class="info-link">Linkedin</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <h2 class="info-row-heading">Skills</h2>
+          <p class="info-row-content">
+            Brand Systems &amp; Guidelines / Logo / Typography / Workshop Facilitation /
+            Strategy / Art Direction / Motion Design / UI / Visual Design / Marketing
+            Sites / Product Design / User Journey Mapping / Site Mapping / Illustration /
+            Fine Arts (Painting, Drawing, Sculpture) / Hands Skills / Print / Layout /
+            Screen Printing / 3D
+          </p>
+        </div>
+
+        <div class="info-row">
+          <h2 class="info-row-heading">Software</h2>
+          <p class="info-row-content">
+            Adobe CC / After Effects / Figma Suite / Procreate / Clip Studio / Blender /
+            C4D / Jitter / Claude / Midjourney / ChatGPT / Lovable / Notion / Microsoft
+            Office / G-Suite
+          </p>
+        </div>
+
+        <div class="info-row">
+          <h2 class="info-row-heading">Select Clients</h2>
+          <p class="info-row-content">
+            Rockefeller Center / Box / Quinn / Microsoft / Amazon / Fusion / Salesforce /
+            Fastly / VMWare
+          </p>
+        </div>
+
+        <div class="info-row">
+          <h2 class="info-row-heading">Work Experience</h2>
+          <div class="info-row-content info-jobs">
+            <div class="info-job">
+              <span class="info-job-company">Big Human /</span>
+              <span class="info-job-title">Senior Brand &amp; Product Designer</span>
+              <span class="info-job-dates">/ 2022–Current</span>
+            </div>
+            <div class="info-job">
+              <span class="info-job-company">Crown Social /</span>
+              <span class="info-job-title">Senior Designer</span>
+              <span class="info-job-dates">/ 2018–2019</span>
+            </div>
+            <div class="info-job">
+              <span class="info-job-company">Summer School Collective /</span>
+              <span class="info-job-title">Art Curator and Organizer</span>
+              <span class="info-job-dates">/ 2015–2019</span>
+            </div>
+            <div class="info-job">
+              <span class="info-job-company">Indigo Slate /</span>
+              <span class="info-job-title">Designer, Senior Designer</span>
+              <span class="info-job-dates">/ 2016–2018, 2019–2022</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <h2 class="info-row-heading">Education</h2>
+          <div class="info-row-content info-list">
+            <p>Decorus Atelier / Fine Arts</p>
+            <p>Cornish College of the Arts / Bachelors of Fine Arts in Visual Communication</p>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      (function () {
+        var scrollThreshold = 80;
+        function onScroll() {
+          document.body.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+
+      (function () {
+        var ctx = null;
+        function playClick() {
+          if (!ctx) {
+            ctx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          if (ctx.state === "suspended") ctx.resume();
+          var now = ctx.currentTime;
+          function tick(t) {
+            var osc = ctx.createOscillator();
+            var gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = "square";
+            osc.frequency.setValueAtTime(1800, t);
+            osc.frequency.exponentialRampToValueAtTime(200, t + 0.008);
+            gain.gain.setValueAtTime(0.018, t);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.012);
+            osc.start(t);
+            osc.stop(t + 0.012);
+          }
+          tick(now);
+          tick(now + 0.006);
+        }
+        document.querySelectorAll(".nav a").forEach(function (link) {
+          link.addEventListener("mouseenter", playClick);
+        });
+      })();
+    </script>
+  </body>
+</html>
