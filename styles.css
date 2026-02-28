@@ -1047,20 +1047,27 @@ a.brand {
 .project-media-track {
   display: flex;
   flex-direction: row;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  padding-right: clamp(1.5rem, 4vw, 4rem);
+  align-items: stretch;
+  gap: 1.25rem;
+  padding-right: 50vw;
   min-width: min-content;
   height: 100%;
+  box-sizing: border-box;
 }
 
-.project-media-track img {
+.project-media-track img,
+.project-media-track video {
   height: clamp(18rem, 45vw, 31.887rem);
   width: auto;
+  min-width: clamp(12rem, 30vw, 21rem);
   flex-shrink: 0;
   display: block;
   border-radius: 1rem;
   pointer-events: none;
+  object-fit: cover;
+  background: var(--bg);
 }
+
 
 /* On mobile, show a peek of the second image so it’s clear you can swipe */
 @media (max-width: 768px) {
