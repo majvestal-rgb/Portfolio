@@ -700,7 +700,7 @@ body.is-scrolled .nav a {
 }
 
 .misc-paper-dragging {
-  will-change: transform;
+  /* No will-change here to avoid layer promotion jump on mousedown */
 }
 
 .misc-paper.is-visible {
@@ -726,6 +726,184 @@ body.is-scrolled .nav a {
   .misc-paper {
     width: 300px;
     height: 300px;
+  }
+}
+
+/* Switch at bottom center */
+.misc-view-switch-wrap {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.misc-view-switch {
+  display: inline-flex;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.misc-view-switch-option {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-family: "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.875rem;
+  color: #CECECE;
+  cursor: pointer;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.misc-view-switch-option:hover {
+  color: #fff;
+}
+
+.misc-view-switch-option[aria-pressed="true"] {
+  background: #acd387;
+  color: #0d0d0d;
+}
+
+/* Lightbox (gallery mode) */
+.misc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.misc-lightbox[hidden] {
+  display: none;
+}
+
+.misc-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.misc-lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.misc-lightbox-content > * {
+  pointer-events: auto;
+}
+
+.misc-lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+  opacity: 0.9;
+}
+
+.misc-lightbox-close:hover {
+  opacity: 1;
+}
+
+.misc-lightbox-media {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.misc-lightbox-media img,
+.misc-lightbox-media video {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.misc-lightbox-media video {
+  background: #000;
+}
+
+/* Mosaic gallery view */
+.misc-gallery {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+body.misc-gallery-view .misc-playground {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+body.misc-gallery-view .misc-gallery {
+  display: block;
+  column-count: 5;
+  column-gap: 4px;
+  column-width: 168px;
+  padding-top: 6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+.misc-gallery-item {
+  break-inside: avoid;
+  margin-bottom: 4px;
+  overflow: hidden;
+  background: var(--bg, #0d0d0d);
+  cursor: pointer;
+  display: block;
+}
+
+.misc-gallery-item img,
+.misc-gallery-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+.misc-gallery-item video {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  body.misc-gallery-view .misc-gallery {
+    column-count: 3;
+    column-width: 120px;
+    column-gap: 4px;
   }
 }
 

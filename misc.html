@@ -38,6 +38,20 @@
       </div>
       <main class="page-main misc-page">
         <div id="misc-playground" class="misc-playground" role="application" aria-label="Draggable image playground"></div>
+        <div id="misc-gallery" class="misc-gallery" role="list" aria-label="Mosaic gallery of all images" hidden></div>
+        <div class="misc-view-switch-wrap">
+          <div class="misc-view-switch" role="group" aria-label="View mode">
+            <button type="button" id="misc-view-playground" class="misc-view-switch-option" aria-pressed="true" aria-label="Playground view">Playground</button>
+            <button type="button" id="misc-view-gallery" class="misc-view-switch-option" aria-pressed="false" aria-label="Gallery view">Gallery</button>
+          </div>
+        </div>
+        <div id="misc-lightbox" class="misc-lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+          <button type="button" class="misc-lightbox-backdrop" aria-label="Close"></button>
+          <div class="misc-lightbox-content">
+            <button type="button" class="misc-lightbox-close" aria-label="Close">&times;</button>
+            <div class="misc-lightbox-media"></div>
+          </div>
+        </div>
       </main>
     </div>
     <script>
@@ -142,11 +156,18 @@
           "assets/misc/pixmonshading.png",
           "assets/misc/scroll-stopping-creative.gif",
           "assets/misc/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
+          "assets/misc/Screenshot%202026-03-01%20at%203.17.42%20PM.png",
+          "assets/misc/Screenshot%202026-03-01%20at%203.17.51%20PM.png",
+          "assets/misc/Screenshot%202026-03-01%20at%203.18.22%20PM.png",
           "assets/misc/slack_5.mp4",
           "assets/misc/stickersanimate_small.gif",
           "assets/misc/Untitled_Artwork.gif"
         ];
         var playground = document.getElementById("misc-playground");
+        var galleryEl = document.getElementById("misc-gallery");
+        var btnPlayground = document.getElementById("misc-view-playground");
+        var btnGallery = document.getElementById("misc-view-gallery");
+        var currentImageList = [];
         var topZ = 1;
         var dragTarget = null;
         var dragOffsetX = 0;
@@ -164,9 +185,9 @@
 
         function placePaper(paper) {
           var b = getViewportBounds();
-          var cardW = 374;
-          var cardH = 374;
-          var pad = 40;
+          var cardW = paper.offsetWidth;
+          var cardH = paper.offsetHeight;
+          var pad = 20;
           var x = pad + randomIn(0, Math.max(0, b.width - cardW - pad * 2));
           var y = pad + randomIn(0, Math.max(0, b.height - cardH - pad * 2));
           var rot = randomIn(-14, 14);
@@ -186,17 +207,20 @@
           dragTarget = paper;
           dragCardW = paper.offsetWidth;
           dragCardH = paper.offsetHeight;
-          var r = paper.getBoundingClientRect();
-          var cx = r.left + r.width / 2;
-          var cy = r.top + r.height / 2;
+          // Use stored position only (no getBoundingClientRect) so we don't trigger reflow or rounding differences
+          var topLeftX = parseFloat(paper.dataset.x) || 0;
+          var topLeftY = parseFloat(paper.dataset.y) || 0;
+          var cx = topLeftX + dragCardW / 2;
+          var cy = topLeftY + dragCardH / 2;
           var rot = parseFloat(paper.dataset.rotation) || 0;
           var rotRad = (rot * Math.PI) / 180;
           var cos = Math.cos(rotRad);
           var sin = Math.sin(rotRad);
           dragOffsetX = (clientX - cx) * cos + (clientY - cy) * sin + dragCardW / 2;
           dragOffsetY = -(clientX - cx) * sin + (clientY - cy) * cos + dragCardH / 2;
-          paper.classList.add("misc-paper-dragging");
+          // Lock transform before adding class so first click doesn't jump (avoids compositor rounding on new layer)
           paper.style.transform = "translate3d(" + cx + "px," + cy + "px,0) rotate(" + rot + "deg)";
+          paper.classList.add("misc-paper-dragging");
           var siblings = playground.querySelectorAll(".misc-paper");
           for (var i = 0; i < siblings.length; i++) {
             if (siblings[i] !== paper) siblings[i].style.pointerEvents = "none";
@@ -222,8 +246,8 @@
           var h = window.innerHeight;
           var halfW = dragCardW / 2;
           var halfH = dragCardH / 2;
-          cx = Math.max(halfW, Math.min(w - halfW, cx));
-          cy = Math.max(halfH, Math.min(h - halfH, cy));
+          cx = Math.max(0, Math.min(w, cx));
+          cy = Math.max(0, Math.min(h, cy));
           dragTarget.dataset.x = cx - halfW;
           dragTarget.dataset.y = cy - halfH;
           if (rafId != null) cancelAnimationFrame(rafId);
@@ -321,16 +345,128 @@
 
         function run(imageList) {
           var list = imageList && imageList.length > 0 ? imageList : [];
-          var count = list.length > 0 ? list.length : DEFAULT_COUNT;
+          currentImageList = list.length > 0 ? list.slice() : MISC_IMAGES.slice();
+          var count = currentImageList.length;
           for (var i = 0; i < count; i++) {
             (function (idx) {
-              var src = list[idx] || PLACEHOLDER;
+              var src = currentImageList[idx] || PLACEHOLDER;
               setTimeout(function () { addPaper(idx, src); }, idx * DELAY_MS);
             })(i);
           }
         }
 
+        var lightboxEl = document.getElementById("misc-lightbox");
+        var lightboxMedia = lightboxEl ? lightboxEl.querySelector(".misc-lightbox-media") : null;
+        var lightboxBackdrop = lightboxEl ? lightboxEl.querySelector(".misc-lightbox-backdrop") : null;
+        var lightboxCloseBtn = lightboxEl ? lightboxEl.querySelector(".misc-lightbox-close") : null;
+
+        function openLightbox(src, isVideo) {
+          if (!lightboxEl || !lightboxMedia) return;
+          while (lightboxMedia.firstChild) lightboxMedia.removeChild(lightboxMedia.firstChild);
+          if (isVideo) {
+            var v = document.createElement("video");
+            v.src = src;
+            v.muted = true;
+            v.loop = true;
+            v.playsInline = true;
+            v.autoplay = true;
+            v.controls = true;
+            v.setAttribute("playsinline", "");
+            lightboxMedia.appendChild(v);
+          } else {
+            var img = document.createElement("img");
+            img.src = src || PLACEHOLDER;
+            img.alt = "";
+            lightboxMedia.appendChild(img);
+          }
+          lightboxEl.hidden = false;
+          document.body.style.overflow = "hidden";
+          if (lightboxCloseBtn) lightboxCloseBtn.focus();
+        }
+
+        function closeLightbox() {
+          if (!lightboxEl || !lightboxMedia) return;
+          var v = lightboxMedia.querySelector("video");
+          if (v) v.pause();
+          while (lightboxMedia.firstChild) lightboxMedia.removeChild(lightboxMedia.firstChild);
+          lightboxEl.hidden = true;
+          document.body.style.overflow = "";
+        }
+
+        function initLightbox() {
+          if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
+          if (lightboxCloseBtn) lightboxCloseBtn.addEventListener("click", closeLightbox);
+          document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && lightboxEl && !lightboxEl.hidden) closeLightbox();
+          });
+        }
+
+        function buildGallery() {
+          if (!galleryEl || galleryEl.children.length > 0) return;
+          var list = currentImageList.length > 0 ? currentImageList : MISC_IMAGES;
+          list.forEach(function (src, i) {
+            var item = document.createElement("div");
+            item.className = "misc-gallery-item";
+            item.setAttribute("role", "listitem");
+            item.setAttribute("tabindex", "0");
+            var isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(src || "");
+            item.dataset.src = src || PLACEHOLDER;
+            item.dataset.isVideo = isVideo ? "1" : "0";
+            if (isVideo) {
+              var video = document.createElement("video");
+              video.src = src;
+              video.muted = true;
+              video.loop = true;
+              video.playsInline = true;
+              video.autoplay = true;
+              video.setAttribute("playsinline", "");
+              item.appendChild(video);
+            } else {
+              var img = document.createElement("img");
+              img.src = src || PLACEHOLDER;
+              img.alt = "";
+              img.loading = "lazy";
+              img.decoding = "async";
+              item.appendChild(img);
+            }
+            item.addEventListener("click", function () {
+              openLightbox(item.dataset.src, item.dataset.isVideo === "1");
+            });
+            item.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openLightbox(item.dataset.src, item.dataset.isVideo === "1");
+              }
+            });
+            galleryEl.appendChild(item);
+          });
+        }
+
+        function setGalleryView(active) {
+          if (active) {
+            buildGallery();
+            galleryEl.hidden = false;
+            if (playground) playground.setAttribute("aria-hidden", "true");
+            document.body.classList.add("misc-gallery-view");
+            if (btnPlayground) { btnPlayground.setAttribute("aria-pressed", "false"); }
+            if (btnGallery) { btnGallery.setAttribute("aria-pressed", "true"); }
+          } else {
+            galleryEl.hidden = true;
+            if (playground) playground.removeAttribute("aria-hidden");
+            document.body.classList.remove("misc-gallery-view");
+            if (btnPlayground) { btnPlayground.setAttribute("aria-pressed", "true"); }
+            if (btnGallery) { btnGallery.setAttribute("aria-pressed", "false"); }
+          }
+        }
+
+        function initToggle() {
+          if (btnPlayground) btnPlayground.addEventListener("click", function () { setGalleryView(false); });
+          if (btnGallery) btnGallery.addEventListener("click", function () { setGalleryView(true); });
+        }
+
         function start() {
+          initToggle();
+          initLightbox();
           fetch("./content.json?t=" + Date.now())
             .then(function (r) { return r.ok ? r.json() : null; })
             .then(function (data) {
