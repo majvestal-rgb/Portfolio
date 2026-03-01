@@ -689,8 +689,8 @@ body.is-scrolled .nav a {
   position: absolute;
   left: 0;
   top: 0;
-  width: 260px;
-  height: 260px;
+  width: 312px;
+  height: 312px;
   cursor: grab;
   overflow: hidden;
   opacity: 0;
@@ -724,8 +724,8 @@ body.is-scrolled .nav a {
 
 @media (max-width: 768px) {
   .misc-paper {
-    width: 208px;
-    height: 208px;
+    width: 250px;
+    height: 250px;
   }
 }
 

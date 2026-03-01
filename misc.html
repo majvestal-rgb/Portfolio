@@ -117,7 +117,7 @@
       (function () {
         var PLACEHOLDER = "assets/case-study-placeholder.png";
         var DEFAULT_COUNT = 14;
-        var DELAY_MS = 1400;
+        var DELAY_MS = 1120;
         var MISC_IMAGES = [
           "assets/misc/2CHA_UKNOW_1.gif",
           "assets/misc/AdamArtwork_final%28ish%29.png",
@@ -143,8 +143,6 @@
           "assets/misc/scroll-stopping-creative.gif",
           "assets/misc/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
           "assets/misc/tamagotchi.gif",
-          "assets/misc/tnb.png",
-          "assets/misc/Untitled_Artwork%202.jpg",
           "assets/misc/Untitled_Artwork.gif",
           "assets/misc/y2kbabyc4d2.png"
         ];
@@ -153,8 +151,8 @@
         var dragTarget = null;
         var dragOffsetX = 0;
         var dragOffsetY = 0;
-        var dragCardW = 260;
-        var dragCardH = 260;
+        var dragCardW = 312;
+        var dragCardH = 312;
 
         function getViewportBounds() {
           return { width: window.innerWidth, height: window.innerHeight };
@@ -166,8 +164,8 @@
 
         function placePaper(paper) {
           var b = getViewportBounds();
-          var cardW = 260;
-          var cardH = 260;
+          var cardW = 312;
+          var cardH = 312;
           var pad = 40;
           var x = pad + randomIn(0, Math.max(0, b.width - cardW - pad * 2));
           var y = pad + randomIn(0, Math.max(0, b.height - cardH - pad * 2));
@@ -299,6 +297,8 @@
             img.src = src || PLACEHOLDER;
             img.alt = "";
             img.draggable = false;
+            img.loading = "lazy";
+            img.decoding = "async";
             paper.appendChild(img);
           }
           placePaper(paper);
