@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npx serve ."
+    "start": "npx serve .",
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
 }

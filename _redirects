@@ -1,0 +1,2 @@
+# Serve index.html at root (Netlify)
+/    /index.html   200
