@@ -198,6 +198,7 @@
           dragOffsetX = (clientX - cx) * cos + (clientY - cy) * sin + dragCardW / 2;
           dragOffsetY = -(clientX - cx) * sin + (clientY - cy) * cos + dragCardH / 2;
           paper.classList.add("misc-paper-dragging");
+          paper.style.transform = "translate3d(" + cx + "px," + cy + "px,0) rotate(" + rot + "deg)";
           var siblings = playground.querySelectorAll(".misc-paper");
           for (var i = 0; i < siblings.length; i++) {
             if (siblings[i] !== paper) siblings[i].style.pointerEvents = "none";
