@@ -1,6 +1,7 @@
 /**
- * Optimize PNG/JPEG images in assets/ for faster loading.
- * Compresses in place without changing dimensions. Run: npm run optimize-images
+ * Optimize PNG/JPEG/GIF images in assets/ for faster loading.
+ * PNG/JPEG: re-encodes in place. GIF: lossy re-encode (interFrameMaxError, effort).
+ * Run: npm run optimize-images (all assets) or npm run optimize-images-misc (misc only).
  * Requires: npm install --save-dev sharp
  */
 
@@ -15,8 +16,10 @@ try {
   process.exit(1);
 }
 
-const ASSETS = path.join(__dirname, '..', 'assets');
-const EXT = /\.(png|jpe?g)$/i;
+const ASSETS_ROOT = path.join(__dirname, '..', 'assets');
+const ASSETS = process.argv[2] === 'misc' ? path.join(ASSETS_ROOT, 'misc') : ASSETS_ROOT;
+const MISCMODE = process.argv[2] === 'misc';
+const EXT = /\.(png|jpe?g|gif)$/i;
 
 function walk(dir, files = []) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -33,27 +36,37 @@ async function optimize(filePath) {
   const stat = fs.statSync(filePath);
   const before = stat.size;
 
-  const pipeline = sharp(filePath);
-
-  if (ext === '.png') {
-    await pipeline
-      .png({ compressionLevel: 9 })
+  if (ext === '.gif') {
+    await sharp(filePath, { animated: true })
+      .gif({ interFrameMaxError: 10, effort: 10 })
       .toFile(filePath + '.tmp');
   } else {
-    await pipeline
-      .jpeg({ quality: 88, mozjpeg: true })
-      .toFile(filePath + '.tmp');
+    const pipeline = sharp(filePath);
+    if (ext === '.png') {
+      await pipeline
+        .png({ compressionLevel: 9 })
+        .toFile(filePath + '.tmp');
+    } else {
+      const quality = MISCMODE ? 80 : 88;
+      await pipeline
+        .jpeg({ quality, mozjpeg: true })
+        .toFile(filePath + '.tmp');
+    }
   }
 
   fs.renameSync(filePath + '.tmp', filePath);
   const after = fs.statSync(filePath).size;
   const saved = ((1 - after / before) * 100).toFixed(1);
-  console.log(path.relative(ASSETS, filePath) + '  ' + (after - before < 0 ? '-' + saved + '%' : 'unchanged'));
+  console.log(path.relative(ASSETS_ROOT, filePath) + '  ' + (after - before < 0 ? '-' + saved + '%' : 'unchanged'));
 }
 
 (async () => {
+  if (!fs.existsSync(ASSETS)) {
+    console.error('Directory not found:', ASSETS);
+    process.exit(1);
+  }
   const files = walk(ASSETS);
-  console.log('Optimizing ' + files.length + ' images...');
+  console.log('Optimizing ' + files.length + ' images' + (MISCMODE ? ' (misc, stronger compression)' : '') + '...');
   for (const f of files) await optimize(f);
   console.log('Done.');
 })();
