@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "npx serve .",
-    "optimize-images": "node scripts/optimize-images.js"
+    "optimize-images": "node scripts/optimize-images.js",
+    "update-content": "node scripts/csv-to-content.js",
+    "export-content": "node scripts/json-to-csv.js"
   },
   "dependencies": {},
   "devDependencies": {

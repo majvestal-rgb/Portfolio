@@ -667,6 +667,68 @@ body.is-scrolled .nav a {
   width: 100%;
 }
 
+/* Misc. playground page */
+.misc-page {
+  display: block;
+  width: 100%;
+  min-height: 0;
+}
+
+.misc-playground {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.misc-playground .misc-paper {
+  pointer-events: auto;
+}
+
+.misc-paper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 260px;
+  cursor: grab;
+  overflow: hidden;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  transition: opacity 0.5s ease;
+  contain: layout style paint;
+}
+
+.misc-paper-dragging {
+  will-change: transform;
+}
+
+.misc-paper.is-visible {
+  opacity: 1;
+}
+
+.misc-paper:active {
+  cursor: grabbing;
+}
+
+
+.misc-paper img,
+.misc-paper video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .misc-paper {
+    width: 208px;
+    height: 208px;
+  }
+}
+
 .info-intro {
   color: #CECECE;
   font-family: "articulat-cf", system-ui, -apple-system, BlinkMacSystemFont,

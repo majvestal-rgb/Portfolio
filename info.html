@@ -32,29 +32,25 @@
           <nav class="nav">
             <a class="nav-link" href="./index.html">Work</a>
             <a class="nav-link nav-active" href="info.html">Info</a>
+            <a class="nav-link" href="misc.html">Misc.</a>
           </nav>
         </div>
       </div>
-      <p class="header-intro scroll-in">
-        Maj is a senior designer based in Brooklyn, NY. They specialize in
-        designing brand systems that translate seamlessly into digital
-        experiences. This site is currently under construction. 
-        Detailed case studies are available <a href="mailto:maj.v.des@gmail.com" class="header-intro-link">upon request</a>.
-      </p>
+      <p class="header-intro scroll-in" data-content-html="headerIntroInfo">Maj is a senior designer based in Brooklyn, NY. They specialize in designing brand systems that translate seamlessly into digital experiences. This site is currently under construction. Detailed case studies are available <a href="mailto:maj.v.des@gmail.com" class="header-intro-link">upon request</a>.</p>
 
       <main class="page-main info-page">
         <div class="info-row scroll-in">
           <h2 class="info-row-heading">Contact</h2>
           <div class="info-row-content">
-            <a href="mailto:maj.v.des@gmail.com" class="info-link">maj.v.des@gmail.com</a><br />
-            <a href="tel:+12068536672" class="info-link">+1(206)8536672</a><br />
-            <a href="#" class="info-link">Linkedin</a>
+            <a href="mailto:maj.v.des@gmail.com" class="info-link" data-content="info.contact.email">maj.v.des@gmail.com</a><br />
+            <a href="tel:+12068536672" class="info-link" data-content="info.contact.phone">+1(206)8536672</a><br />
+            <a href="#" class="info-link" data-content="info.contact.linkedin">Linkedin</a>
           </div>
         </div>
 
         <div class="info-row scroll-in">
           <h2 class="info-row-heading">Skills</h2>
-          <p class="info-row-content">
+          <p class="info-row-content" data-content="info.skills">
             Brand Systems &amp; Guidelines / Logo / Typography / Workshop Facilitation /
             Strategy / Art Direction / Motion Design / UI / Visual Design / Marketing
             Sites / Product Design / User Journey Mapping / Site Mapping / Illustration /
@@ -65,7 +61,7 @@
 
         <div class="info-row scroll-in">
           <h2 class="info-row-heading">Software</h2>
-          <p class="info-row-content">
+          <p class="info-row-content" data-content="info.software">
             Adobe CC / After Effects / Figma Suite / Cursor / Procreate / Clip Studio / Blender /
             C4D / Jitter / Claude / Midjourney / ChatGPT / Lovable / Notion / Microsoft
             Office / G-Suite
@@ -74,7 +70,7 @@
 
         <div class="info-row scroll-in">
           <h2 class="info-row-heading">Select Clients</h2>
-          <p class="info-row-content">
+          <p class="info-row-content" data-content="info.clients">
             Rockefeller Center / Box / Quinn / Microsoft / Amazon / Fusion / Salesforce /
             Fastly / VMWare
           </p>
@@ -84,24 +80,24 @@
           <h2 class="info-row-heading">Work Experience</h2>
           <div class="info-row-content info-jobs">
             <div class="info-job">
-              <span class="info-job-company">Big Human /</span>
-              <span class="info-job-title">Senior Brand &amp; Product Designer</span>
-              <span class="info-job-dates">/ 2022–Current</span>
+              <span class="info-job-company" data-content="info.jobs.0.company">Big Human /</span>
+              <span class="info-job-title" data-content="info.jobs.0.title">Senior Brand &amp; Product Designer</span>
+              <span class="info-job-dates" data-content="info.jobs.0.dates">/ 2022–Current</span>
             </div>
             <div class="info-job">
-              <span class="info-job-company">Crown Social /</span>
-              <span class="info-job-title">Senior Designer</span>
-              <span class="info-job-dates">/ 2018–2019</span>
+              <span class="info-job-company" data-content="info.jobs.1.company">Crown Social /</span>
+              <span class="info-job-title" data-content="info.jobs.1.title">Senior Designer</span>
+              <span class="info-job-dates" data-content="info.jobs.1.dates">/ 2018–2019</span>
             </div>
             <div class="info-job">
-              <span class="info-job-company">Summer School Collective /</span>
-              <span class="info-job-title">Art Curator and Organizer</span>
-              <span class="info-job-dates">/ 2015–2019</span>
+              <span class="info-job-company" data-content="info.jobs.2.company">Summer School Collective /</span>
+              <span class="info-job-title" data-content="info.jobs.2.title">Art Curator and Organizer</span>
+              <span class="info-job-dates" data-content="info.jobs.2.dates">/ 2015–2019</span>
             </div>
             <div class="info-job">
-              <span class="info-job-company">Indigo Slate /</span>
-              <span class="info-job-title">Designer, Senior Designer</span>
-              <span class="info-job-dates">/ 2016–2018, 2019–2022</span>
+              <span class="info-job-company" data-content="info.jobs.3.company">Indigo Slate /</span>
+              <span class="info-job-title" data-content="info.jobs.3.title">Designer, Senior Designer</span>
+              <span class="info-job-dates" data-content="info.jobs.3.dates">/ 2016–2018, 2019–2022</span>
             </div>
           </div>
         </div>
@@ -109,8 +105,8 @@
         <div class="info-row scroll-in">
           <h2 class="info-row-heading">Education</h2>
           <div class="info-row-content info-list">
-            <p>Decorus Atelier / Fine Arts</p>
-            <p>Cornish College of the Arts / Bachelors of Fine Arts in Visual Communication</p>
+            <p data-content="info.education.0">Decorus Atelier / Fine Arts</p>
+            <p data-content="info.education.1">Cornish College of the Arts / Bachelors of Fine Arts in Visual Communication</p>
           </div>
         </div>
       </main>
@@ -189,5 +185,6 @@
         });
       })();
     </script>
+    <script src="content-loader.js"></script>
   </body>
 </html>
