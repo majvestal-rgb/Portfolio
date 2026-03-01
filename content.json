@@ -3,13 +3,15 @@
   "headerIntroInfo": "Maj is a senior designer based in Brooklyn, NY. They specialize in designing brand systems that translate seamlessly into digital experiences. This website is a work in progress being built with Cursor, please forgive any bugs. Detailed case studies are available <a href=\"mailto:maj.v.des@gmail.com\" class=\"header-intro-link\">upon request</a>.",
   "miscIntro": "",
   "miscImages": [
-    "assets/misc/2CHA_UKNOW_1.gif",
+    "assets/misc/2CHA_UKNOW_1smalol.gif",
     "assets/misc/AdamArtwork_final%28ish%29.png",
+    "assets/misc/Animation%20Base.gif",
     "assets/misc/alicegas.png",
     "assets/misc/Artboard%2016-100.jpg",
-    "assets/misc/Artboard%203%20copy-100.jpg",
     "assets/misc/Artboard%208-100.jpg",
     "assets/misc/bananabread_color%20more%20noise.png",
+    "assets/misc/Connectors%20colorful6.jpg",
+    "assets/misc/cover.png",
     "assets/misc/crap-100.jpg",
     "assets/misc/cyberunderground.png",
     "assets/misc/fairy2.png",
@@ -26,9 +28,9 @@
     "assets/misc/pixmonshading.png",
     "assets/misc/scroll-stopping-creative.gif",
     "assets/misc/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
-    "assets/misc/tamagotchi.gif",
-    "assets/misc/Untitled_Artwork.gif",
-    "assets/misc/y2kbabyc4d2.png"
+    "assets/misc/slack_5.mp4",
+    "assets/misc/stickersanimate_small.gif",
+    "assets/misc/Untitled_Artwork.gif"
   ],
   "projects": [
     {
@@ -76,7 +78,7 @@
     },
     "skills": "Brand Systems & Guidelines / Logo / Typography / Workshop Facilitation / Strategy / Art Direction / Motion Design / UI / Visual Design / Marketing Sites / Product Design / User Journey Mapping / Site Mapping / Illustration / Fine Arts (Painting, Drawing, Sculpture) / Hands Skills / Print / Layout / Screen Printing / 3D",
     "software": "Adobe CC / After Effects / Figma Suite / Cursor / Procreate / Clip Studio / Blender / C4D / Jitter / Claude / Midjourney / ChatGPT / Lovable / Notion / Microsoft Office / G-Suite",
-    "clients": "Rockefeller Center / Box / Quinn / Microsoft / Amazon / Fusion / Salesforce / Fastly / VMWare",
+    "clients": "Rockefeller Center / Box / Quinn / Microsoft / Amazon / Fusion / Salesforce / Fastly / VMWare / Zillow / Seattle Interactive Conference",
     "jobs": [
       { "company": "Big Human /", "title": "Senior Brand & Product Designer", "dates": "/ 2022–Current" },
       { "company": "Crown Social /", "title": "Senior Designer", "dates": "/ 2018–2019" },
