@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="misc-gallery-view">
     <div id="password-screen" class="password-screen" aria-label="Password required">
       <div class="password-screen-inner">
         <p class="password-screen-label">Password required</p>
@@ -38,11 +38,11 @@
       </div>
       <main class="page-main misc-page">
         <div id="misc-playground" class="misc-playground" role="application" aria-label="Draggable image playground"></div>
-        <div id="misc-gallery" class="misc-gallery" role="list" aria-label="Mosaic gallery of all images" hidden></div>
+        <div id="misc-gallery" class="misc-gallery" role="list" aria-label="Mosaic gallery of all images"></div>
         <div class="misc-view-switch-wrap">
           <div class="misc-view-switch" role="group" aria-label="View mode">
-            <button type="button" id="misc-view-playground" class="misc-view-switch-option" aria-pressed="true" aria-label="Playground view">Playground</button>
-            <button type="button" id="misc-view-gallery" class="misc-view-switch-option" aria-pressed="false" aria-label="Gallery view">Gallery</button>
+            <button type="button" id="misc-view-playground" class="misc-view-switch-option" aria-pressed="false" aria-label="Playground view">Playground</button>
+            <button type="button" id="misc-view-gallery" class="misc-view-switch-option" aria-pressed="true" aria-label="Gallery view">Gallery</button>
           </div>
         </div>
         <div id="misc-lightbox" class="misc-lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
@@ -157,7 +157,7 @@
           "assets/misc/JuicyCD.png",
           "assets/misc/lottery.mp4",
           "assets/misc/me.png",
-          "assets/misc/paitning.png",
+          "assets/misc/painting.png",
           "assets/misc/pixmonshading.png",
           "assets/misc/scroll-stopping-creative.gif",
           "assets/misc/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
@@ -187,11 +187,13 @@
 
         function placePaper(paper) {
           var b = getViewportBounds();
-          var cardW = paper.offsetWidth;
-          var cardH = paper.offsetHeight;
-          var pad = 20;
-          var x = pad + randomIn(0, Math.max(0, b.width - cardW - pad * 2));
-          var y = pad + randomIn(0, Math.max(0, b.height - cardH - pad * 2));
+          var cardW = paper.offsetWidth || (b.width <= 768 ? 300 : 374);
+          var cardH = paper.offsetHeight || (b.width <= 768 ? 300 : 374);
+          var pad = 60;
+          var maxX = Math.max(0, b.width - cardW - pad * 2);
+          var maxY = Math.max(0, b.height - cardH - pad * 2);
+          var x = pad + randomIn(0, maxX);
+          var y = pad + randomIn(0, maxY);
           var rot = randomIn(-14, 14);
           paper.style.transform = "translate3d(" + (x + cardW / 2) + "px," + (y + cardH / 2) + "px,0) rotate(" + rot + "deg)";
           paper.dataset.rotation = rot;
@@ -476,8 +478,12 @@
                 ? data.miscImages
                 : MISC_IMAGES;
               run(list);
+              setGalleryView(true);
             })
-            .catch(function () { run(MISC_IMAGES); });
+            .catch(function () {
+              run(MISC_IMAGES);
+              setGalleryView(true);
+            });
         }
 
         if (document.readyState === "loading") {

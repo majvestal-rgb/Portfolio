@@ -1,6 +1,6 @@
 {
-  "headerIntro": "Maj is a senior designer based in Brooklyn, NY. They specialize in designing brand systems that translate seamlessly into digital experiences. This website is a work in progress being built with Cursor, please forgive any bugs. Detailed case studies are available <a href=\"mailto:maj.v.des@gmail.com\" class=\"header-intro-link\">upon request</a>.",
-  "headerIntroInfo": "Maj is a senior designer based in Brooklyn, NY. They specialize in designing brand systems that translate seamlessly into digital experiences. This website is a work in progress being built with Cursor, please forgive any bugs. Detailed case studies are available <a href=\"mailto:maj.v.des@gmail.com\" class=\"header-intro-link\">upon request</a>.",
+  "headerIntro": "Maj is a senior designer based in Brooklyn, NY. They specialize in designing brand systems that translate seamlessly into digital experiences. This website is being built with Cursor and is a work in progress, please forgive any bugs. Detailed case studies are available <a href=\"mailto:maj.v.des@gmail.com\" class=\"header-intro-link\">upon request</a>.",
+  "headerIntroInfo": "Maj is a senior designer based in Brooklyn, NY. They specialize in designing brand systems that translate seamlessly into digital experiences. This website is being built with Cursor and is a work in progress, please forgive any bugs. Detailed case studies are available <a href=\"mailto:maj.v.des@gmail.com\" class=\"header-intro-link\">upon request</a>.",
   "miscIntro": "",
   "miscImages": [
     "assets/misc/2CHA_UKNOW_1smalol.gif",
@@ -27,7 +27,7 @@
     "assets/misc/JuicyCD.png",
     "assets/misc/lottery.mp4",
     "assets/misc/me.png",
-    "assets/misc/paitning.png",
+    "assets/misc/painting.png",
     "assets/misc/pixmonshading.png",
     "assets/misc/scroll-stopping-creative.gif",
     "assets/misc/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
@@ -39,14 +39,14 @@
     {
       "title": "Wordibly",
       "role": "Senior Brand & Product Designer",
-      "contributions": "Brand, Product, Web Design, Design System, Illustration, Motion,",
+      "contributions": "Brand, Product, Web Design, Design System, Illustration, Motion",
       "about": "Wordibly is a platform that offers both AI and human transcription services. We built the brand from the ground up (aside from their logo mark) and incorporated the new visual identity into the marketing website and the product, focusing on establishing a friendly, human look and feel."
     },
     {
       "title": "Cotulla",
       "role": "Senior Brand & Product Designer",
       "contributions": "Brand & Web Design, Design System",
-      "about": "Cotulla is a cloud-based platform for oil & gas operators, offering advanced analytics and data visualization capabilities to optimize production and improve operational efficiency."
+      "about": "Cotulla is a trade school umbrella organization that hired Big Human to build their brand from scratch — logo, visual identity, and website — with the goal of establishing legitimacy and attracting funding."
     },
     {
       "title": "Aviation.edu",
@@ -77,9 +77,9 @@
     "contact": {
       "email": "maj.v.des@gmail.com",
       "phone": "+1(206)8536672",
-      "linkedin": "Linkedin"
+      "linkedin": "LinkedIn"
     },
-    "skills": "Brand Systems & Guidelines / Logo / Typography / Workshop Facilitation / Strategy / Art Direction / Motion Design / UI / Visual Design / Marketing Sites / Product Design / User Journey Mapping / Site Mapping / Illustration / Fine Arts (Painting, Drawing, Sculpture) / Hands Skills / Print / Layout / Screen Printing / 3D",
+    "skills": "Brand Systems & Guidelines / Logo / Typography / Workshop Facilitation / Strategy / Art Direction / Motion Design / UI / Visual Design / Marketing Sites / Product Design / User Journey Mapping / Site Mapping / Illustration / Fine Arts (Painting, Drawing, Sculpture) / Hand Skills / Print / Layout / Screen Printing / 3D",
     "software": "Adobe CC / After Effects / Figma Suite / Cursor / Procreate / Clip Studio / Blender / C4D / Jitter / Claude / Midjourney / ChatGPT / Lovable / Notion / Microsoft Office / G-Suite",
     "clients": "Rockefeller Center / Box / Quinn / Microsoft / Amazon / Fusion / Salesforce / Fastly / VMWare / Zillow / Seattle Interactive Conference / Wordibly",
     "jobs": [
@@ -90,7 +90,7 @@
     ],
     "education": [
       "Decorus Atelier / Fine Arts",
-      "Cornish College of the Arts / Bachelors of Fine Arts in Visual Communication"
+      "Cornish College of the Arts / Bachelor of Fine Arts in Visual Communication"
     ]
   }
 }
