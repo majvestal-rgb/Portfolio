@@ -397,6 +397,12 @@ body.is-scrolled .nav a {
   color: #acd387;
 }
 
+.nav a.nav-link-disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
 .page-main {
   width: 100%;
   max-width: 100%;

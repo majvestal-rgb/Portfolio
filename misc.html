@@ -30,9 +30,9 @@
         <div class="site-header-inner">
           <a href="./index.html" class="brand brand-wordmark">Maj Vestal</a>
           <nav class="nav">
-            <a class="nav-link" href="./index.html">Work</a>
-            <a class="nav-link" href="info.html">Info</a>
             <a class="nav-link nav-active" href="misc.html">Misc.</a>
+            <a class="nav-link nav-link-disabled" href="#" tabindex="-1" aria-disabled="true">Work</a>
+            <a class="nav-link nav-link-disabled" href="#" tabindex="-1" aria-disabled="true">Info</a>
           </nav>
         </div>
       </div>
@@ -57,7 +57,7 @@
     <script>
       (function () {
         var KEY = "mv_portfolio";
-        var PASS = "frog";
+        var PASS = "frog666";
         var screen = document.getElementById("password-screen");
         var form = document.getElementById("password-form");
         var input = document.getElementById("password-input");
@@ -236,6 +236,10 @@
         }
 
         var rafId = null;
+        var lastDragCx = 0;
+        var lastDragCy = 0;
+        var lastDragTime = 0;
+
         function moveDrag(clientX, clientY) {
           if (!dragTarget) return;
           var rot = parseFloat(dragTarget.dataset.rotation) || 0;
@@ -257,8 +261,44 @@
           if (rafId != null) cancelAnimationFrame(rafId);
           rafId = requestAnimationFrame(function () {
             dragTarget.style.transform = "translate3d(" + cx + "px," + cy + "px,0) rotate(" + rot + "deg)";
+            lastDragCx = cx;
+            lastDragCy = cy;
+            lastDragTime = performance.now();
             rafId = null;
           });
+        }
+
+        var inertiaRafId = null;
+        var FRICTION = 0.92;
+        var MIN_VELOCITY = 0.4;
+
+        function runInertia(paper, startCx, startCy, vx, vy) {
+          if (!paper || (Math.abs(vx) < MIN_VELOCITY && Math.abs(vy) < MIN_VELOCITY)) return;
+          var rot = parseFloat(paper.dataset.rotation) || 0;
+          var halfW = dragCardW / 2;
+          var halfH = dragCardH / 2;
+          var w = window.innerWidth;
+          var h = window.innerHeight;
+          var cx = startCx;
+          var cy = startCy;
+
+          function tick() {
+            cx += vx;
+            cy += vy;
+            vx *= FRICTION;
+            vy *= FRICTION;
+            cx = Math.max(0, Math.min(w, cx));
+            cy = Math.max(0, Math.min(h, cy));
+            paper.dataset.x = cx - halfW;
+            paper.dataset.y = cy - halfH;
+            paper.style.transform = "translate3d(" + cx + "px," + cy + "px,0) rotate(" + rot + "deg)";
+            if (Math.abs(vx) >= MIN_VELOCITY || Math.abs(vy) >= MIN_VELOCITY) {
+              inertiaRafId = requestAnimationFrame(tick);
+            } else {
+              inertiaRafId = null;
+            }
+          }
+          inertiaRafId = requestAnimationFrame(tick);
         }
 
         function endDrag() {
@@ -266,16 +306,33 @@
             cancelAnimationFrame(rafId);
             rafId = null;
           }
+          var paper = dragTarget;
+          var startCx = 0;
+          var startCy = 0;
+          var vx = 0;
+          var vy = 0;
+          if (paper) {
+            var halfW = dragCardW / 2;
+            var halfH = dragCardH / 2;
+            startCx = (parseFloat(paper.dataset.x) || 0) + halfW;
+            startCy = (parseFloat(paper.dataset.y) || 0) + halfH;
+            var dt = Math.min(100, Math.max(8, performance.now() - lastDragTime));
+            vx = ((startCx - lastDragCx) / dt) * 16;
+            vy = ((startCy - lastDragCy) / dt) * 16;
+          }
           var papers = playground ? playground.querySelectorAll(".misc-paper") : [];
           for (var i = 0; i < papers.length; i++) papers[i].style.pointerEvents = "";
-          if (dragTarget) {
-            dragTarget.classList.remove("misc-paper-dragging");
+          if (paper) {
+            paper.classList.remove("misc-paper-dragging");
             dragTarget = null;
           }
           document.removeEventListener("mousemove", onMouseMove);
           document.removeEventListener("mouseup", onMouseUp);
           document.removeEventListener("touchmove", onTouchMove);
           document.removeEventListener("touchend", onTouchEnd);
+          if (paper && (Math.abs(vx) > MIN_VELOCITY || Math.abs(vy) > MIN_VELOCITY)) {
+            runInertia(paper, startCx, startCy, vx, vy);
+          }
         }
 
         function onMouseDown(e) {
