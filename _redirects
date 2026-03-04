@@ -1,2 +1,2 @@
-# Serve index.html at root (Netlify)
-/    /index.html   200
+# Landing page is Misc (Netlify)
+/    /misc.html   200

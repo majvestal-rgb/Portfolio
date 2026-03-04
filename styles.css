@@ -403,6 +403,13 @@ body.is-scrolled .nav a {
   pointer-events: none;
 }
 
+/* Temporarily hide Work and Info nav items */
+.nav a[href="./index.html"],
+.nav a[href="index.html"],
+.nav a[href="info.html"] {
+  display: none !important;
+}
+
 .page-main {
   width: 100%;
   max-width: 100%;
