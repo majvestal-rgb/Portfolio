@@ -1,2 +1,6 @@
 # Landing page is Misc (Netlify)
 /    /misc.html   200
+/work    /misc.html   302
+/work.html    /misc.html   302
+/info    /misc.html   302
+/info.html    /misc.html   302

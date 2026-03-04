@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="misc-gallery-view">
+  <body>
     <div id="password-screen" class="password-screen" aria-label="Password required">
       <div class="password-screen-inner">
         <p class="password-screen-label">Password required</p>
@@ -34,11 +34,11 @@
       </div>
       <main class="page-main misc-page">
         <div id="misc-playground" class="misc-playground" role="application" aria-label="Draggable image playground"></div>
-        <div id="misc-gallery" class="misc-gallery" role="list" aria-label="Mosaic gallery of all images"></div>
+        <div id="misc-gallery" class="misc-gallery" role="list" aria-label="Mosaic gallery of all images" hidden></div>
         <div class="misc-view-switch-wrap">
           <div class="misc-view-switch" role="group" aria-label="View mode">
-            <button type="button" id="misc-view-playground" class="misc-view-switch-option" aria-pressed="false" aria-label="Playground view">Playground</button>
-            <button type="button" id="misc-view-gallery" class="misc-view-switch-option" aria-pressed="true" aria-label="Gallery view">Gallery</button>
+            <button type="button" id="misc-view-playground" class="misc-view-switch-option" aria-pressed="true" aria-label="Playground view">Playground</button>
+            <button type="button" id="misc-view-gallery" class="misc-view-switch-option" aria-pressed="false" aria-label="Gallery view">Gallery</button>
           </div>
         </div>
         <div id="misc-lightbox" class="misc-lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
@@ -531,11 +531,9 @@
                 ? data.miscImages
                 : MISC_IMAGES;
               run(list);
-              setGalleryView(true);
             })
             .catch(function () {
               run(MISC_IMAGES);
-              setGalleryView(true);
             });
         }
 
