@@ -2,12 +2,62 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=misc.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maj Vestal – Portfolio</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-    <script>window.location.replace("misc.html");</script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
+    <script>
+      (function () {
+        var MODE_KEY = "mv_portfolio";
+        var mode = sessionStorage.getItem(MODE_KEY);
+        if (mode === "full") {
+          window.location.replace("work.html");
+          return;
+        }
+        if (mode === "locked") {
+          window.location.replace("misc.html");
+          return;
+        }
+      })();
+    </script>
   </head>
   <body>
-    <p>Redirecting to <a href="misc.html">Misc.</a>…</p>
+    <div class="password-screen is-visible" aria-label="Password required">
+      <div class="password-screen-inner">
+        <p class="password-screen-label">Password required</p>
+        <form id="password-form" class="password-form" autocomplete="off">
+          <input type="password" id="password-input" class="password-input" placeholder="Enter password" autocomplete="off" aria-label="Password" />
+          <button type="submit" class="password-submit">Enter</button>
+        </form>
+        <p id="password-error" class="password-error" aria-live="polite" hidden>Incorrect password</p>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var MODE_KEY = "mv_portfolio";
+        var PASS_FULL = "frog";
+        var PASS_LOCKED = "frog666";
+        var form = document.getElementById("password-form");
+        var input = document.getElementById("password-input");
+        var error = document.getElementById("password-error");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var v = (input.value || "").trim();
+          if (v === PASS_FULL) {
+            sessionStorage.setItem(MODE_KEY, "full");
+            window.location.replace("work.html");
+            return;
+          }
+          if (v === PASS_LOCKED) {
+            sessionStorage.setItem(MODE_KEY, "locked");
+            window.location.replace("misc.html");
+            return;
+          }
+          error.hidden = false;
+          input.focus();
+        });
+      })();
+    </script>
   </body>
 </html>

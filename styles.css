@@ -403,11 +403,12 @@ body.is-scrolled .nav a {
   pointer-events: none;
 }
 
-/* Temporarily hide Work and Info nav items */
-.nav a[href="./index.html"],
-.nav a[href="index.html"],
-.nav a[href="info.html"] {
+/* Hide Work/Info on Misc when in locked mode; show when full mode */
+.nav-link-full {
   display: none !important;
+}
+body.mode-full .nav-link-full {
+  display: revert !important;
 }
 
 .page-main {

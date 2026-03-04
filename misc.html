@@ -28,8 +28,12 @@
     <div class="page">
       <div class="site-header">
         <div class="site-header-inner">
-          <a href="misc.html" class="brand brand-wordmark">Maj Vestal</a>
-          <nav class="nav" aria-label="Main navigation"></nav>
+          <a href="misc.html" class="brand brand-wordmark" id="misc-brand">Maj Vestal</a>
+          <nav class="nav" aria-label="Main navigation">
+            <a class="nav-link nav-link-full" href="work.html">Work</a>
+            <a class="nav-link nav-link-full" href="info.html">Info</a>
+            <a class="nav-link nav-active" href="misc.html">Misc.</a>
+          </nav>
         </div>
       </div>
       <main class="page-main misc-page">
@@ -52,26 +56,39 @@
     </div>
     <script>
       (function () {
-        var KEY = "mv_portfolio";
-        var PASS = "frog666";
+        var MODE_KEY = "mv_portfolio";
+        var PASS_FULL = "frog";
+        var PASS_LOCKED = "frog666";
         var screen = document.getElementById("password-screen");
         var form = document.getElementById("password-form");
         var input = document.getElementById("password-input");
         var error = document.getElementById("password-error");
-        if (sessionStorage.getItem(KEY) === PASS) {
+        var mode = sessionStorage.getItem(MODE_KEY);
+        if (mode === "full" || mode === "locked") {
           screen.classList.add("is-unlocked");
+          if (mode === "full") {
+            document.body.classList.add("mode-full");
+            var brand = document.getElementById("misc-brand");
+            if (brand) brand.setAttribute("href", "work.html");
+          }
           return;
         }
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          if (input.value === PASS) {
-            sessionStorage.setItem(KEY, PASS);
+          var v = (input.value || "").trim();
+          if (v === PASS_FULL) {
+            sessionStorage.setItem(MODE_KEY, "full");
+            window.location.replace("work.html");
+            return;
+          }
+          if (v === PASS_LOCKED) {
+            sessionStorage.setItem(MODE_KEY, "locked");
             screen.classList.add("is-unlocked");
             error.hidden = true;
-          } else {
-            error.hidden = false;
-            input.focus();
+            return;
           }
+          error.hidden = false;
+          input.focus();
         });
       })();
 
@@ -522,6 +539,7 @@
         }
 
         function start() {
+          setGalleryView(false);
           initToggle();
           initLightbox();
           fetch("./content.json?t=" + Date.now())
