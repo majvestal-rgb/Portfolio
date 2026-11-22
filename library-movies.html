@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies – Maj Vestal</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <script>
+      try { localStorage.setItem("mv_aesthetic", "neo"); } catch (e) {}
+    </script>
+    <script src="./theme.js?v=6"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./theme-neo.css?v=24" />
+    <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
+    <script>
+      (function () {
+        var m = sessionStorage.getItem("mv_portfolio");
+        if (m !== "full") {
+          window.location.replace(m === "locked" ? "misc.html" : "index.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="neo-personal neo-shelf">
+    <nav class="nav" aria-label="Leave this room">
+      <a class="nav-link neo-back" href="fun.html">back to home</a>
+    </nav>
+    <main class="shelf" id="shelf" data-kind="Movies"></main>
+    <script>
+      (function () {
+        var items = [
+          {
+                    "src": "assets/library/movies/51529.jpg",
+                    "title": "The Conversation",
+                    "by": "1974"
+          },
+          {
+                    "src": "assets/library/movies/fdloxb8aysegrl44i1rvokiwdcw.jpg",
+                    "title": "Rosemary's Baby",
+                    "by": "1968"
+          },
+          {
+                    "src": "assets/library/movies/47048.jpg",
+                    "title": "The Exorcist",
+                    "by": "1973"
+          },
+          {
+                    "src": "assets/library/movies/51373.jpg",
+                    "title": "Vampyr",
+                    "by": "1932"
+          },
+          {
+                    "src": "assets/library/movies/46263.jpg",
+                    "title": "The Player",
+                    "by": "1992"
+          },
+          {
+                    "src": "assets/library/movies/50752.jpg",
+                    "title": "The Long Goodbye",
+                    "by": "1973"
+          },
+          {
+                    "src": "assets/library/movies/51062.jpg",
+                    "title": "Stalker",
+                    "by": "1979"
+          },
+          {
+                    "src": "assets/library/movies/nmb4qhcrmdfnp6rgb81yufgi83l.jpg",
+                    "title": "Donnie Darko",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/125830.jpg",
+                    "title": "Inherent Vice",
+                    "by": "2014"
+          },
+          {
+                    "src": "assets/library/movies/1115874.jpg",
+                    "title": "No Other Land",
+                    "by": "2024"
+          },
+          {
+                    "src": "assets/library/movies/197994.jpg",
+                    "title": "Leila and the Wolves",
+                    "by": "1984"
+          },
+          {
+                    "src": "assets/library/movies/51359.jpg",
+                    "title": "Blue Velvet",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/2105.jpg",
+                    "title": "The Snow Queen",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/xiewkpagqrrk5woyncaypd65hrp.jpg",
+                    "title": "The Lord of the Rings: The Return of the King",
+                    "by": "2003"
+          },
+          {
+                    "src": "assets/library/movies/51929.jpg",
+                    "title": "The Lord of the Rings: The Two Towers",
+                    "by": "2002"
+          },
+          {
+                    "src": "assets/library/movies/9cavnvbrbzsm7mcjoimncphsbbn.jpg",
+                    "title": "Nowhere",
+                    "by": "1997"
+          },
+          {
+                    "src": "assets/library/movies/1tx9zlgvvwjaqhms1vafsypi7vk.jpg",
+                    "title": "The Lord of the Rings: The Fellowship of the Ring",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/hhsycyvpy1v0etjkgngdvpdo2qk.jpg",
+                    "title": "Yi Yi",
+                    "by": "2000"
+          },
+          {
+                    "src": "assets/library/movies/827898.jpg",
+                    "title": "The Lobby - USA",
+                    "by": "2018"
+          },
+          {
+                    "src": "assets/library/movies/505142.jpg",
+                    "title": "The Lobby",
+                    "by": "2017"
+          },
+          {
+                    "src": "assets/library/movies/53929.jpg",
+                    "title": "The Crazy Family",
+                    "by": "1984"
+          },
+          {
+                    "src": "assets/library/movies/540648.jpg",
+                    "title": "Gaza Fights for Freedom",
+                    "by": "2019"
+          },
+          {
+                    "src": "assets/library/movies/84683.jpg",
+                    "title": "Demons",
+                    "by": "1971"
+          },
+          {
+                    "src": "assets/library/movies/41057.jpg",
+                    "title": "Vampyros Lesbos",
+                    "by": "1971"
+          },
+          {
+                    "src": "assets/library/movies/50662.jpg",
+                    "title": "eXistenZ",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/48011.jpg",
+                    "title": "Sonatine",
+                    "by": "1993"
+          },
+          {
+                    "src": "assets/library/movies/143541.jpg",
+                    "title": "A Story of Yonosuke",
+                    "by": "2013"
+          },
+          {
+                    "src": "assets/library/movies/317187.jpg",
+                    "title": "A Bride for Rip Van Winkle",
+                    "by": "2016"
+          },
+          {
+                    "src": "assets/library/movies/41990.jpg",
+                    "title": "Angel's Egg",
+                    "by": "1985"
+          },
+          {
+                    "src": "assets/library/movies/840578.jpg",
+                    "title": "Eight Hours Don’t Make a Day",
+                    "by": "1972"
+          },
+          {
+                    "src": "assets/library/movies/21014.jpg",
+                    "title": "A Touch of Zen",
+                    "by": "1970"
+          },
+          {
+                    "src": "assets/library/movies/34606.jpg",
+                    "title": "Linda Linda Linda",
+                    "by": "2005"
+          },
+          {
+                    "src": "assets/library/movies/49169.jpg",
+                    "title": "Southland Tales",
+                    "by": "2006"
+          },
+          {
+                    "src": "assets/library/movies/66326.jpg",
+                    "title": "Mirrored Mind",
+                    "by": "2005"
+          },
+          {
+                    "src": "assets/library/movies/26484.jpg",
+                    "title": "Eureka",
+                    "by": "2000"
+          },
+          {
+                    "src": "assets/library/movies/29625.jpg",
+                    "title": "Opening Night",
+                    "by": "1977"
+          },
+          {
+                    "src": "assets/library/movies/49860.jpg",
+                    "title": "The Night of the Hunter",
+                    "by": "1955"
+          },
+          {
+                    "src": "assets/library/movies/nup6kna8oiul2vnbeq4bjhtcpo8.jpg",
+                    "title": "Singin' in the Rain",
+                    "by": "1952"
+          },
+          {
+                    "src": "assets/library/movies/dgnye40ywdi7gbahmmb5yccivpi.jpg",
+                    "title": "High and Low",
+                    "by": "1963"
+          },
+          {
+                    "src": "assets/library/movies/78632.jpg",
+                    "title": "Blue",
+                    "by": "1993"
+          },
+          {
+                    "src": "assets/library/movies/4khpccbi8d8nb5yp4d39mo2z3zp.jpg",
+                    "title": "Kuroneko",
+                    "by": "1968"
+          },
+          {
+                    "src": "assets/library/movies/26713.jpg",
+                    "title": "Whisper of the Heart",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/29874.jpg",
+                    "title": "Blue Spring",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/139802.jpg",
+                    "title": "Love in the Time of Twilight",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/51398.jpg",
+                    "title": "Face/Off",
+                    "by": "1997"
+          },
+          {
+                    "src": "assets/library/movies/45013.jpg",
+                    "title": "Hard Boiled",
+                    "by": "1992"
+          },
+          {
+                    "src": "assets/library/movies/88790.jpg",
+                    "title": "Kagero-za",
+                    "by": "1981"
+          },
+          {
+                    "src": "assets/library/movies/51195.jpg",
+                    "title": "Dog Day Afternoon",
+                    "by": "1975"
+          },
+          {
+                    "src": "assets/library/movies/51817.jpg",
+                    "title": "Some Like It Hot",
+                    "by": "1959"
+          },
+          {
+                    "src": "assets/library/movies/51774.jpg",
+                    "title": "The Apartment",
+                    "by": "1960"
+          },
+          {
+                    "src": "assets/library/movies/3ngzgjfjzep4guxrrnszeaauljj.jpg",
+                    "title": "Barbarella",
+                    "by": "1968"
+          },
+          {
+                    "src": "assets/library/movies/h1rblyffp9xoxzjt5odqvfxbwic.jpg",
+                    "title": "The Face of Another",
+                    "by": "1966"
+          },
+          {
+                    "src": "assets/library/movies/136231.jpg",
+                    "title": "The Blue Sky Maiden",
+                    "by": "1957"
+          },
+          {
+                    "src": "assets/library/movies/42117.jpg",
+                    "title": "Godzilla: Final Wars",
+                    "by": "2004"
+          },
+          {
+                    "src": "assets/library/movies/41294.jpg",
+                    "title": "9 Souls",
+                    "by": "2003"
+          },
+          {
+                    "src": "assets/library/movies/208877.jpg",
+                    "title": "Evangelion: 3.0+1.0 Thrice Upon a Time",
+                    "by": "2021"
+          },
+          {
+                    "src": "assets/library/movies/35443.jpg",
+                    "title": "Kamikaze Girls",
+                    "by": "2004"
+          },
+          {
+                    "src": "assets/library/movies/9484.jpg",
+                    "title": "Goodbye, Dragon Inn",
+                    "by": "2003"
+          },
+          {
+                    "src": "assets/library/movies/42089.jpg",
+                    "title": "A Brighter Summer Day",
+                    "by": "1991"
+          },
+          {
+                    "src": "assets/library/movies/226152.jpg",
+                    "title": "His Motorbike, Her Island",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/vkxkrsjkbscf2obhnuvced3ijac.jpg",
+                    "title": "Raise the Red Lantern",
+                    "by": "1991"
+          },
+          {
+                    "src": "assets/library/movies/40686.jpg",
+                    "title": "Planet of the Vampires",
+                    "by": "1965"
+          },
+          {
+                    "src": "assets/library/movies/27776.jpg",
+                    "title": "Swing Girls",
+                    "by": "2004"
+          },
+          {
+                    "src": "assets/library/movies/99494.jpg",
+                    "title": "Casting Blossoms to the Sky",
+                    "by": "2012"
+          },
+          {
+                    "src": "assets/library/movies/34686.jpg",
+                    "title": "Electric Dragon 80000V",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/51257.jpg",
+                    "title": "Andrei Rublev",
+                    "by": "1966"
+          },
+          {
+                    "src": "assets/library/movies/858363.jpg",
+                    "title": "Re: Cutie Honey",
+                    "by": "2004"
+          },
+          {
+                    "src": "assets/library/movies/21517.jpg",
+                    "title": "The Heroic Trio",
+                    "by": "1993"
+          },
+          {
+                    "src": "assets/library/movies/25222.jpg",
+                    "title": "Godzilla vs. Hedorah",
+                    "by": "1971"
+          },
+          {
+                    "src": "assets/library/movies/560520.jpg",
+                    "title": "Shin Ultraman",
+                    "by": "2022"
+          },
+          {
+                    "src": "assets/library/movies/29790.jpg",
+                    "title": "A Snake of June",
+                    "by": "2002"
+          },
+          {
+                    "src": "assets/library/movies/443086.jpg",
+                    "title": "One Cut of the Dead",
+                    "by": "2017"
+          },
+          {
+                    "src": "assets/library/movies/confessions.jpg",
+                    "title": "Confessions",
+                    "by": "2010"
+          },
+          {
+                    "src": "assets/library/movies/51570.jpg",
+                    "title": "Rashomon",
+                    "by": "1950"
+          },
+          {
+                    "src": "assets/library/movies/uhfpmv88cck5efemchggz2eissl.jpg",
+                    "title": "Audition",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/6421.jpg",
+                    "title": "Gamera 3: Revenge of Iris",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/odctbdvjmxaqstt4fikm7uhz8ta.jpg",
+                    "title": "Evangelion: 2.0 You Can (Not) Advance",
+                    "by": "2009"
+          },
+          {
+                    "src": "assets/library/movies/51969.jpg",
+                    "title": "Nausicaä of the Valley of the Wind",
+                    "by": "1984"
+          },
+          {
+                    "src": "assets/library/movies/38592.jpg",
+                    "title": "Funky Forest: The First Contact",
+                    "by": "2005"
+          },
+          {
+                    "src": "assets/library/movies/41447.jpg",
+                    "title": "All About Lily Chou-Chou",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/45602.jpg",
+                    "title": "Chungking Express",
+                    "by": "1994"
+          },
+          {
+                    "src": "assets/library/movies/761067.jpg",
+                    "title": "Go Seppuku Yourselves",
+                    "by": "2021"
+          },
+          {
+                    "src": "assets/library/movies/648945.jpg",
+                    "title": "The Day of Destruction",
+                    "by": "2020"
+          },
+          {
+                    "src": "assets/library/movies/ecjathunhgll9arkuftmkguawdj.jpg",
+                    "title": "Melancholia",
+                    "by": "2011"
+          },
+          {
+                    "src": "assets/library/movies/26515.jpg",
+                    "title": "Hanging Garden",
+                    "by": "2005"
+          },
+          {
+                    "src": "assets/library/movies/25588.jpg",
+                    "title": "Ritual",
+                    "by": "2000"
+          },
+          {
+                    "src": "assets/library/movies/22128.jpg",
+                    "title": "Memories",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/47734.jpg",
+                    "title": "Swallowtail Butterfly",
+                    "by": "1996"
+          },
+          {
+                    "src": "assets/library/movies/44519.jpg",
+                    "title": "Dreams",
+                    "by": "1990"
+          },
+          {
+                    "src": "assets/library/movies/679291.jpg",
+                    "title": "Drive My Car",
+                    "by": "2021"
+          },
+          {
+                    "src": "assets/library/movies/84510.jpg",
+                    "title": "August in the Water",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/35411.jpg",
+                    "title": "Man with a Movie Camera",
+                    "by": "1929"
+          },
+          {
+                    "src": "assets/library/movies/v6xrz4fr92ky1onc3hsevrsvr1n.jpg",
+                    "title": "Seven Samurai",
+                    "by": "1954"
+          },
+          {
+                    "src": "assets/library/movies/428548.jpg",
+                    "title": "Serial Experiments Lain",
+                    "by": "1998"
+          },
+          {
+                    "src": "assets/library/movies/612845.jpg",
+                    "title": "Chobits",
+                    "by": "2002"
+          },
+          {
+                    "src": "assets/library/movies/46995.jpg",
+                    "title": "Metropolis",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/47800.jpg",
+                    "title": "The Taking of Pelham One Two Three",
+                    "by": "1974"
+          },
+          {
+                    "src": "assets/library/movies/pbaqlkolydp7jl6p0vmywldtrpd.jpg",
+                    "title": "The King of Comedy",
+                    "by": "1982"
+          },
+          {
+                    "src": "assets/library/movies/50653.jpg",
+                    "title": "The Elephant Man",
+                    "by": "1980"
+          },
+          {
+                    "src": "assets/library/movies/38953.jpg",
+                    "title": "Late Spring",
+                    "by": "1949"
+          },
+          {
+                    "src": "assets/library/movies/543380.jpg",
+                    "title": "Labyrinth of Cinema",
+                    "by": "2019"
+          },
+          {
+                    "src": "assets/library/movies/qrpuybe97xnryk63tryiwbitoav.jpg",
+                    "title": "Happy Together",
+                    "by": "1997"
+          },
+          {
+                    "src": "assets/library/movies/51620.jpg",
+                    "title": "The Seventh Seal",
+                    "by": "1957"
+          },
+          {
+                    "src": "assets/library/movies/50822.jpg",
+                    "title": "Inland Empire",
+                    "by": "2006"
+          },
+          {
+                    "src": "assets/library/movies/aijo3kraead4mdbsef3rto2viuz.jpg",
+                    "title": "Possession",
+                    "by": "1981"
+          },
+          {
+                    "src": "assets/library/movies/35421.jpg",
+                    "title": "The Color of Pomegranates",
+                    "by": "1969"
+          },
+          {
+                    "src": "assets/library/movies/43015.jpg",
+                    "title": "Harakiri",
+                    "by": "1962"
+          },
+          {
+                    "src": "assets/library/movies/41081.jpg",
+                    "title": "The Battle of Algiers",
+                    "by": "1966"
+          },
+          {
+                    "src": "assets/library/movies/7zr0eudmcivnjreslmaawi5x7mv.jpg",
+                    "title": "What Ever Happened to Baby Jane?",
+                    "by": "1962"
+          },
+          {
+                    "src": "assets/library/movies/21185.jpg",
+                    "title": "A Moment of Innocence",
+                    "by": "1996"
+          },
+          {
+                    "src": "assets/library/movies/mj9dl6hzp3xhcbohmgrai8i2azu.jpg",
+                    "title": "Legend",
+                    "by": "1985"
+          },
+          {
+                    "src": "assets/library/movies/30720.jpg",
+                    "title": "I Am Cuba",
+                    "by": "1964"
+          },
+          {
+                    "src": "assets/library/movies/ran.jpg",
+                    "title": "Ran",
+                    "by": "1985"
+          },
+          {
+                    "src": "assets/library/movies/34848.jpg",
+                    "title": "Meshes of the Afternoon",
+                    "by": "1943"
+          },
+          {
+                    "src": "assets/library/movies/51528.jpg",
+                    "title": "Solaris",
+                    "by": "1972"
+          },
+          {
+                    "src": "assets/library/movies/51462.jpg",
+                    "title": "La Jetée",
+                    "by": "1962"
+          },
+          {
+                    "src": "assets/library/movies/50978.jpg",
+                    "title": "Funeral Parade of Roses",
+                    "by": "1969"
+          },
+          {
+                    "src": "assets/library/movies/51685.jpg",
+                    "title": "La Strada",
+                    "by": "1954"
+          },
+          {
+                    "src": "assets/library/movies/6vblwscfabim9v5cwhc7iimgaq9.jpg",
+                    "title": "House",
+                    "by": "1977"
+          },
+          {
+                    "src": "assets/library/movies/51355.jpg",
+                    "title": "Persona",
+                    "by": "1966"
+          },
+          {
+                    "src": "assets/library/movies/pmb1kaw83l0n5m2sjhdkpgcl6wa.jpg",
+                    "title": "Tokyo Story",
+                    "by": "1953"
+          },
+          {
+                    "src": "assets/library/movies/36192.jpg",
+                    "title": "Come and See",
+                    "by": "1985"
+          },
+          {
+                    "src": "assets/library/movies/686367.jpg",
+                    "title": "Puparia",
+                    "by": "2020"
+          },
+          {
+                    "src": "assets/library/movies/51523.jpg",
+                    "title": "City of God",
+                    "by": "2002"
+          },
+          {
+                    "src": "assets/library/movies/22968.jpg",
+                    "title": "Streetwise",
+                    "by": "1984"
+          },
+          {
+                    "src": "assets/library/movies/c8zcryhsag9r9oebfdrhwsldwnp.jpg",
+                    "title": "Jodorowsky's Dune",
+                    "by": "2013"
+          },
+          {
+                    "src": "assets/library/movies/268383.jpg",
+                    "title": "Tomb Raider",
+                    "by": "2018"
+          },
+          {
+                    "src": "assets/library/movies/o8psaygwtyfpqjhhisomq178j4n.jpg",
+                    "title": "Videodrome",
+                    "by": "1983"
+          },
+          {
+                    "src": "assets/library/movies/51471.jpg",
+                    "title": "Nosferatu",
+                    "by": "1922"
+          },
+          {
+                    "src": "assets/library/movies/51578.jpg",
+                    "title": "Psycho",
+                    "by": "1960"
+          },
+          {
+                    "src": "assets/library/movies/1629443.jpg",
+                    "title": "You Can See Everything",
+                    "by": "2026"
+          },
+          {
+                    "src": "assets/library/movies/showgirls.jpg",
+                    "title": "Showgirls",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/951277.jpg",
+                    "title": "One Battle After Another",
+                    "by": "2025"
+          },
+          {
+                    "src": "assets/library/movies/4dq2qykyjejgw0mfhqvxgi2pmyx.jpg",
+                    "title": "Dead Ringers",
+                    "by": "1988"
+          },
+          {
+                    "src": "assets/library/movies/182142.jpg",
+                    "title": "Carol",
+                    "by": "2015"
+          },
+          {
+                    "src": "assets/library/movies/wynnf6lt4ueucureprmthgqik5t.jpg",
+                    "title": "Mysterious Skin",
+                    "by": "2004"
+          },
+          {
+                    "src": "assets/library/movies/36042.jpg",
+                    "title": "My Dinner with Andre",
+                    "by": "1981"
+          },
+          {
+                    "src": "assets/library/movies/398800.jpg",
+                    "title": "The Zone of Interest",
+                    "by": "2023"
+          },
+          {
+                    "src": "assets/library/movies/58621.jpg",
+                    "title": "Love & Pop",
+                    "by": "1998"
+          },
+          {
+                    "src": "assets/library/movies/67008.jpg",
+                    "title": "Wanda",
+                    "by": "1970"
+          },
+          {
+                    "src": "assets/library/movies/qkqijeryan149hzrp5vgf8roc7s.jpg",
+                    "title": "Zodiac",
+                    "by": "2007"
+          },
+          {
+                    "src": "assets/library/movies/51818.jpg",
+                    "title": "The Godfather",
+                    "by": "1972"
+          },
+          {
+                    "src": "assets/library/movies/234814.jpg",
+                    "title": "Tangerine",
+                    "by": "2015"
+          },
+          {
+                    "src": "assets/library/movies/51497.jpg",
+                    "title": "Trainspotting",
+                    "by": "1996"
+          },
+          {
+                    "src": "assets/library/movies/36618.jpg",
+                    "title": "The Sacrifice",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/51994.jpg",
+                    "title": "Heat",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/959540.jpg",
+                    "title": "Anora",
+                    "by": "2024"
+          },
+          {
+                    "src": "assets/library/movies/46990.jpg",
+                    "title": "Romy and Michele's High School Reunion",
+                    "by": "1997"
+          },
+          {
+                    "src": "assets/library/movies/102624.jpg",
+                    "title": "To Sleep So as to Dream",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/79562.jpg",
+                    "title": "Working Girls",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/727160.jpg",
+                    "title": "Jujutsu Kaisen 0",
+                    "by": "2021"
+          },
+          {
+                    "src": "assets/library/movies/48096.jpg",
+                    "title": "Zombie Flesh Eaters",
+                    "by": "1979"
+          },
+          {
+                    "src": "assets/library/movies/879229.jpg",
+                    "title": "Perfect Days",
+                    "by": "2023"
+          },
+          {
+                    "src": "assets/library/movies/40415.jpg",
+                    "title": "The Cremator",
+                    "by": "1969"
+          },
+          {
+                    "src": "assets/library/movies/42026.jpg",
+                    "title": "The Sky Crawlers",
+                    "by": "2008"
+          },
+          {
+                    "src": "assets/library/movies/493725.jpg",
+                    "title": "We Are Little Zombies",
+                    "by": "2019"
+          },
+          {
+                    "src": "assets/library/movies/32088.jpg",
+                    "title": "Stray Dog",
+                    "by": "1949"
+          },
+          {
+                    "src": "assets/library/movies/5lu9hbcgbxjm4r1knthmqad5vrt.jpg",
+                    "title": "Wild at Heart",
+                    "by": "1990"
+          },
+          {
+                    "src": "assets/library/movies/24843.jpg",
+                    "title": "Evil Dead Trap",
+                    "by": "1988"
+          },
+          {
+                    "src": "assets/library/movies/51393.jpg",
+                    "title": "Gentlemen Prefer Blondes",
+                    "by": "1953"
+          },
+          {
+                    "src": "assets/library/movies/51193.jpg",
+                    "title": "Sweet Smell of Success",
+                    "by": "1957"
+          },
+          {
+                    "src": "assets/library/movies/51320.jpg",
+                    "title": "M",
+                    "by": "1931"
+          },
+          {
+                    "src": "assets/library/movies/51854.jpg",
+                    "title": "To Be or Not to Be",
+                    "by": "1942"
+          },
+          {
+                    "src": "assets/library/movies/49595.jpg",
+                    "title": "Ikiru",
+                    "by": "1952"
+          },
+          {
+                    "src": "assets/library/movies/84474.jpg",
+                    "title": "Boy",
+                    "by": "1969"
+          },
+          {
+                    "src": "assets/library/movies/34888.jpg",
+                    "title": "Pulgasari",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/75858.jpg",
+                    "title": "Red Angel",
+                    "by": "1966"
+          },
+          {
+                    "src": "assets/library/movies/xlblsyhe4qsbym5vglc6ycn332e.jpg",
+                    "title": "Helter Skelter",
+                    "by": "2012"
+          },
+          {
+                    "src": "assets/library/movies/220556.jpg",
+                    "title": "The Wailing",
+                    "by": "2016"
+          },
+          {
+                    "src": "assets/library/movies/svpexk18mel0lyaqb8ffuggseq8.jpg",
+                    "title": "Halloween III: Season of the Witch",
+                    "by": "1982"
+          },
+          {
+                    "src": "assets/library/movies/543236.jpg",
+                    "title": "Howl from Beyond the Fog",
+                    "by": "2019"
+          },
+          {
+                    "src": "assets/library/movies/34194.jpg",
+                    "title": "Hana & Alice",
+                    "by": "2004"
+          },
+          {
+                    "src": "assets/library/movies/51717.jpg",
+                    "title": "Eyes Wide Shut",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/47438.jpg",
+                    "title": "Hellraiser",
+                    "by": "1987"
+          },
+          {
+                    "src": "assets/library/movies/i8kstby8sri3cfplaufda5vqlmf.jpg",
+                    "title": "Uncle Boonmee Who Can Recall His Past Lives",
+                    "by": "2010"
+          },
+          {
+                    "src": "assets/library/movies/96166.jpg",
+                    "title": "Sada",
+                    "by": "1998"
+          },
+          {
+                    "src": "assets/library/movies/27236.jpg",
+                    "title": "Comrades, Almost a Love Story",
+                    "by": "1996"
+          },
+          {
+                    "src": "assets/library/movies/51812.jpg",
+                    "title": "King Kong",
+                    "by": "1933"
+          },
+          {
+                    "src": "assets/library/movies/45221.jpg",
+                    "title": "Excalibur",
+                    "by": "1981"
+          },
+          {
+                    "src": "assets/library/movies/51840.jpg",
+                    "title": "Ali: Fear Eats the Soul",
+                    "by": "1974"
+          },
+          {
+                    "src": "assets/library/movies/51390.jpg",
+                    "title": "Monty Python and the Holy Grail",
+                    "by": "1975"
+          },
+          {
+                    "src": "assets/library/movies/28063.jpg",
+                    "title": "Godzilla, Mothra and King Ghidorah: Giant Monsters All-Out Attack",
+                    "by": "2001"
+          },
+          {
+                    "src": "assets/library/movies/51445.jpg",
+                    "title": "Aliens",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/31111.jpg",
+                    "title": "Memories of Matsuko",
+                    "by": "2006"
+          },
+          {
+                    "src": "assets/library/movies/402903.jpg",
+                    "title": "World of Tomorrow Episode Two: The Burden of Other People's Thoughts",
+                    "by": "2017"
+          },
+          {
+                    "src": "assets/library/movies/snwzvgzgcau8ljzmqsywevggw6c.jpg",
+                    "title": "Dancer in the Dark",
+                    "by": "2000"
+          },
+          {
+                    "src": "assets/library/movies/42942.jpg",
+                    "title": "Beau Travail",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/51476.jpg",
+                    "title": "Beauty and the Beast",
+                    "by": "1946"
+          },
+          {
+                    "src": "assets/library/movies/227784.jpg",
+                    "title": "Annihilation",
+                    "by": "2018"
+          },
+          {
+                    "src": "assets/library/movies/6909.jpg",
+                    "title": "Gamera 2: Attack of Legion",
+                    "by": "1996"
+          },
+          {
+                    "src": "assets/library/movies/wvzfk5qr6dglwnd8mczwjsqwg4q.jpg",
+                    "title": "The Handmaiden",
+                    "by": "2016"
+          },
+          {
+                    "src": "assets/library/movies/26908.jpg",
+                    "title": "Night on the Galactic Railroad",
+                    "by": "1985"
+          },
+          {
+                    "src": "assets/library/movies/51518.jpg",
+                    "title": "The Matrix",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/52122.jpg",
+                    "title": "Celia",
+                    "by": "1989"
+          },
+          {
+                    "src": "assets/library/movies/42884.jpg",
+                    "title": "Ugetsu",
+                    "by": "1953"
+          },
+          {
+                    "src": "assets/library/movies/9lmjxdap9iaeqe6aaa9fzzytq79.jpg",
+                    "title": "Nostalgia",
+                    "by": "1983"
+          },
+          {
+                    "src": "assets/library/movies/8ywirgqidtzesemhqvqm5fri6n1.jpg",
+                    "title": "Shin Godzilla",
+                    "by": "2016"
+          },
+          {
+                    "src": "assets/library/movies/51867.jpg",
+                    "title": "A Clockwork Orange",
+                    "by": "1971"
+          },
+          {
+                    "src": "assets/library/movies/154920.jpg",
+                    "title": "Blonde Death",
+                    "by": "1984"
+          },
+          {
+                    "src": "assets/library/movies/24999.jpg",
+                    "title": "Female Prisoner Scorpion: Jailhouse 41",
+                    "by": "1972"
+          },
+          {
+                    "src": "assets/library/movies/8xotz4qpphcfpoa2v4n9cemdayb.jpg",
+                    "title": "Lady Snowblood",
+                    "by": "1973"
+          },
+          {
+                    "src": "assets/library/movies/60255.jpg",
+                    "title": "Dead Man's Letters",
+                    "by": "1986"
+          },
+          {
+                    "src": "assets/library/movies/44476.jpg",
+                    "title": "Godzilla vs. Destoroyah",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/30899.jpg",
+                    "title": "The Devils",
+                    "by": "1971"
+          },
+          {
+                    "src": "assets/library/movies/109791.jpg",
+                    "title": "Black Panthers",
+                    "by": "1968"
+          },
+          {
+                    "src": "assets/library/movies/tsrdvzy1waxrtemqelbmq9irs08.jpg",
+                    "title": "In the Mood for Love",
+                    "by": "2000"
+          },
+          {
+                    "src": "assets/library/movies/26201.jpg",
+                    "title": "The Cranes Are Flying",
+                    "by": "1957"
+          },
+          {
+                    "src": "assets/library/movies/50973.jpg",
+                    "title": "Mouchette",
+                    "by": "1967"
+          },
+          {
+                    "src": "assets/library/movies/ivans.jpg",
+                    "title": "Ivan's Childhood",
+                    "by": "1962"
+          },
+          {
+                    "src": "assets/library/movies/jquru615tcfzkjzgckzgbuisfmp.jpg",
+                    "title": "The Umbrellas of Cherbourg",
+                    "by": "1964"
+          },
+          {
+                    "src": "assets/library/movies/48866.jpg",
+                    "title": "Theorem",
+                    "by": "1968"
+          },
+          {
+                    "src": "assets/library/movies/42507.jpg",
+                    "title": "A Man Escaped",
+                    "by": "1956"
+          },
+          {
+                    "src": "assets/library/movies/51218.jpg",
+                    "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+                    "by": "1964"
+          },
+          {
+                    "src": "assets/library/movies/qriaeuuwdmlgethk3asax68mg05.jpg",
+                    "title": "Metropolis",
+                    "by": "1927"
+          },
+          {
+                    "src": "assets/library/movies/46175.jpg",
+                    "title": "Perfect Blue",
+                    "by": "1997"
+          },
+          {
+                    "src": "assets/library/movies/51469.jpg",
+                    "title": "Paris, Texas",
+                    "by": "1984"
+          },
+          {
+                    "src": "assets/library/movies/51194.jpg",
+                    "title": "Paths of Glory",
+                    "by": "1957"
+          },
+          {
+                    "src": "assets/library/movies/45489.jpg",
+                    "title": "Fallen Angels",
+                    "by": "1995"
+          },
+          {
+                    "src": "assets/library/movies/51586.jpg",
+                    "title": "The Wrong Trousers",
+                    "by": "1993"
+          },
+          {
+                    "src": "assets/library/movies/bg7k6vtug7ew70gqj6ssrod5d4r.jpg",
+                    "title": "Alien",
+                    "by": "1979"
+          },
+          {
+                    "src": "assets/library/movies/41662.jpg",
+                    "title": "The Wicker Man",
+                    "by": "1973"
+          },
+          {
+                    "src": "assets/library/movies/5pqlc8dp5dxzwg1ym70dzrsdpol.jpg",
+                    "title": "8½",
+                    "by": "1963"
+          },
+          {
+                    "src": "assets/library/movies/55864.jpg",
+                    "title": "Good Morning",
+                    "by": "1959"
+          },
+          {
+                    "src": "assets/library/movies/79080.jpg",
+                    "title": "Black Girl",
+                    "by": "1966"
+          },
+          {
+                    "src": "assets/library/movies/2702.jpg",
+                    "title": "Citizen Kane",
+                    "by": "1941"
+          },
+          {
+                    "src": "assets/library/movies/rwxtyjozmx2rghz7avle1qsjnqe.jpg",
+                    "title": "Days of Heaven",
+                    "by": "1978"
+          },
+          {
+                    "src": "assets/library/movies/49023.jpg",
+                    "title": "Paprika",
+                    "by": "2006"
+          },
+          {
+                    "src": "assets/library/movies/41663.jpg",
+                    "title": "Fantastic Planet",
+                    "by": "1973"
+          },
+          {
+                    "src": "assets/library/movies/there-will-be-blood.jpg",
+                    "title": "There Will Be Blood",
+                    "by": "2007"
+          },
+          {
+                    "src": "assets/library/movies/51728.jpg",
+                    "title": "Magnolia",
+                    "by": "1999"
+          },
+          {
+                    "src": "assets/library/movies/328538.jpg",
+                    "title": "The Florida Project",
+                    "by": "2017"
+          },
+          {
+                    "src": "assets/library/movies/51719.jpg",
+                    "title": "Harold and Maude",
+                    "by": "1971"
+          },
+          {
+                    "src": "assets/library/movies/47914.jpg",
+                    "title": "Punch-Drunk Love",
+                    "by": "2002"
+          },
+          {
+                    "src": "assets/library/movies/51947.jpg",
+                    "title": "Taxi Driver",
+                    "by": "1976"
+          },
+          {
+                    "src": "assets/library/movies/50177.jpg",
+                    "title": "Heathers",
+                    "by": "1989"
+          },
+          {
+                    "src": "assets/library/movies/332437.jpg",
+                    "title": "You Were Never Really Here",
+                    "by": "2017"
+          },
+          {
+                    "src": "assets/library/movies/353117.jpg",
+                    "title": "Get Out",
+                    "by": "2017"
+          }
+];
+        var root = document.getElementById("shelf");
+        var heading = document.createElement("h1");
+        heading.className = "shelf-title";
+        heading.textContent = root.getAttribute("data-kind");
+        root.appendChild(heading);
+        var grid = document.createElement("div");
+        grid.className = "shelf-grid";
+        var count = items.length || 25;
+        for (var i = 0; i < count; i++) {
+          var item = items[i];
+          var fig = document.createElement("figure");
+          fig.className = "shelf-item" + (item && item.src ? "" : " is-empty");
+          if (item && item.src) {
+            var img = document.createElement("img");
+            img.src = item.src;
+            img.alt = item.title || "";
+            fig.appendChild(img);
+          }
+          if (item && (item.title || item.by)) {
+            var cap = document.createElement("figcaption");
+            if (item.title) cap.appendChild(document.createTextNode(item.title));
+            if (item.by) {
+              cap.appendChild(document.createElement("br"));
+              cap.appendChild(document.createElement("br"));
+              cap.appendChild(document.createTextNode(item.by));
+            }
+            fig.appendChild(cap);
+          }
+          grid.appendChild(fig);
+        }
+        root.appendChild(grid);
+      })();
+    </script>
+  </body>
+</html>

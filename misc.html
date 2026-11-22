@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Misc. – Maj Vestal</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./styles.css" />
+    <script src="./theme.js?v=4"></script>
+    <link rel="stylesheet" href="./styles.css?v=2" />
+    <link rel="stylesheet" href="./theme-neo.css?v=44" />
     <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,8 +22,9 @@
         <p class="password-screen-label">Password required</p>
         <form id="password-form" class="password-form" autocomplete="off">
           <input type="password" id="password-input" class="password-input" placeholder="Enter password" autocomplete="off" aria-label="Password" />
-          <button type="submit" class="password-submit">Enter</button>
+          <button type="submit" class="password-submit"><span class="password-submit-job">Enter</span><span class="password-submit-fun">ENTER HERE</span></button>
         </form>
+        <p class="password-splash-line">CLICK TO ENTER.</p>
         <p id="password-error" class="password-error" aria-live="polite" hidden>Incorrect password</p>
       </div>
     </div>
@@ -30,8 +33,8 @@
         <div class="site-header-inner">
           <a href="misc.html" class="brand brand-wordmark" id="misc-brand">Maj Vestal</a>
           <nav class="nav" aria-label="Main navigation">
-            <a class="nav-link nav-link-full" href="work.html">Work</a>
-            <a class="nav-link nav-link-full" href="info.html">Info</a>
+            <a class="nav-link nav-link-full" href="work.html?p=1">Work</a>
+            <a class="nav-link nav-link-full" href="info.html?p=1">Info</a>
             <a class="nav-link nav-active" href="misc.html">Misc.</a>
           </nav>
         </div>
@@ -69,7 +72,7 @@
           if (mode === "full") {
             document.body.classList.add("mode-full");
             var brand = document.getElementById("misc-brand");
-            if (brand) brand.setAttribute("href", "work.html");
+            if (brand) brand.setAttribute("href", "work.html?p=1");
           }
           return;
         }
@@ -78,7 +81,7 @@
           var v = (input.value || "").trim();
           if (v === PASS_FULL) {
             sessionStorage.setItem(MODE_KEY, "full");
-            window.location.replace("work.html");
+            window.location.replace("work.html?p=1");
             return;
           }
           if (v === PASS_LOCKED) {
@@ -146,37 +149,36 @@
         var DEFAULT_COUNT = 14;
         var DELAY_MS = 1120;
         var MISC_IMAGES = [
-          "assets/misc/2CHA_UKNOW_1smalol.gif",
-          "assets/misc/AdamArtwork_final%28ish%29.png",
-          "assets/misc/alicegas.png",
-          "assets/misc/Artboard%2016-100.jpg",
-          "assets/misc/bananabread_color%20more%20noise.png",
+          "assets/misc/Illustrations/2CHA_UKNOW_1smalol.gif",
+          "assets/misc/Illustrations/AdamArtwork_final%28ish%29.png",
+          "assets/misc/Illustrations/alicegas.png",
+          "assets/misc/Illustrations/Artboard%2016-100.jpg",
+          "assets/misc/Illustrations/bananabread_color%20more%20noise.png",
           "assets/misc/Connectors%20colorful6.jpg",
-          "assets/misc/cover.png",
-          "assets/misc/crap-100.jpg",
-          "assets/misc/cyberunderground.png",
-          "assets/misc/fairy2.png",
-          "assets/misc/fairymonster.gif",
-          "assets/misc/figure%20drawing.png",
-          "assets/misc/figure2.png",
-          "assets/misc/figure6.png",
-          "assets/misc/flowers.png",
-          "assets/misc/frogfighter.gif",
-          "assets/misc/illo.png",
-          "assets/misc/illo2.png",
-          "assets/misc/Illustration2.png",
-          "assets/misc/Illustration5.jpg",
-          "assets/misc/jetset%20radio%20girl_Cleanup6.png",
-          "assets/misc/JuicyCD.png",
-          "assets/misc/lottery.mp4",
-          "assets/misc/me.png",
-          "assets/misc/painting.png",
-          "assets/misc/pixmonshading.png",
+          "assets/misc/Illustrations/crap-100.jpg",
+          "assets/misc/Illustrations/cyberunderground.png",
+          "assets/misc/Illustrations/fairy2.png",
+          "assets/misc/Illustrations/fairymonster.gif",
+          "assets/misc/Drawings/figure%20drawing.png",
+          "assets/misc/Drawings/figure2.png",
+          "assets/misc/Drawings/figure6.png",
+          "assets/misc/Paintings/flowers.png",
+          "assets/misc/Illustrations/frogfighter.gif",
+          "assets/misc/Illustrations/illo.png",
+          "assets/misc/Illustrations/illo2.png",
+          "assets/misc/Illustrations/Illustration2.png",
+          "assets/misc/Illustrations/Illustration5.jpg",
+          "assets/misc/3D/jetset%20radio%20girl_Cleanup6.png",
+          "assets/misc/Illustrations/JuicyCD.png",
+          "assets/misc/3D/lottery.mp4",
+          "assets/misc/3D/me.png",
+          "assets/misc/Paintings/painting.png",
+          "assets/misc/Illustrations/pixmonshading.png",
           "assets/misc/scroll-stopping-creative.gif",
-          "assets/misc/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
-          "assets/misc/slack_5.mp4",
+          "assets/misc/3D/Screen%20Shot%202020-05-03%20at%208.04.58%20PM.png",
+          "assets/misc/Illustrations/slack_5.mp4",
           "assets/misc/stickersanimate_small.gif",
-          "assets/misc/Untitled_Artwork.gif"
+          "assets/misc/Illustrations/Untitled_Artwork.gif"
         ];
         var playground = document.getElementById("misc-playground");
         var galleryEl = document.getElementById("misc-gallery");

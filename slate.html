@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLATE — 3 Words, One Truck</title>
+    <style>
+      @font-face {
+        font-family: "Slate General";
+        src: url("fonts/SlateGeneral-Regular.otf") format("opentype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Slate General";
+        src: url("fonts/SlateGeneral-Regular.otf") format("opentype");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Slate General";
+        src: url("fonts/SlateGeneral-Heavy.otf") format("opentype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Slate General";
+        src: url("fonts/SlateGeneral-Heavy.otf") format("opentype");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #1a1a1a;
+        --presets-panel: #a9a095;
+        --preset-bg: #292929;
+        --accent: #ff5700;
+        --text: #e5e5e5;
+        --word-color: #dbdbdb;
+        --word-line: #dbdbdb;
+        --text-tagline: #e5e5e5;
+        --text-preset: #1a1a1a;
+        --remix-bg: #ffb38e;
+        --font: "Slate General", system-ui, sans-serif;
+        /* Figma 755:81229 — artboard 1432 × 996 */
+        --design-w: 1432;
+        --design-h: 996;
+        --scale: min(100vw / var(--design-w), 100dvh / var(--design-h));
+        --header-h: calc(58 * var(--scale));
+        --footer-h: calc(176 * var(--scale));
+        --content-w: calc(780.285 * var(--scale));
+        --subtitle-size: calc(60 * 0.7 * 0.8 * var(--scale));
+        --subtitle-gap: calc(85 * 0.7 * 0.8 * var(--scale));
+        --word-size: calc(217.033 * var(--scale));
+        --word-row-h: calc(var(--word-size) * 0.99);
+        --word-row-gap: 140px;
+        --word-underline-offset: 5px;
+        --word-overlap: max(0px, calc(var(--word-row-h) - var(--word-row-gap)));
+        --ease-tech: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-snap: cubic-bezier(0.34, 1.45, 0.64, 1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-delay: 0ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      [data-enter] {
+        opacity: 0;
+        will-change: transform, opacity;
+      }
+
+      .app.is-booted [data-enter] {
+        animation: tech-rise 0.72s var(--ease-tech) forwards;
+        animation-delay: var(--d, 0ms);
+      }
+
+      .app.is-booted .word-row[data-enter] {
+        animation-name: tech-word-rise;
+        animation-duration: 0.65s;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      @keyframes tech-rise {
+        0% {
+          opacity: 0;
+          transform: translateY(calc(10 * var(--scale)));
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes tech-word-rise {
+        0% {
+          opacity: 1;
+          transform: translateY(calc(8 * var(--scale)));
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .preset-btn {
+        opacity: 0;
+      }
+
+      .app.is-booted .preset-btn {
+        animation: tech-chip-in 0.48s var(--ease-snap) forwards;
+        animation-delay: calc(600ms + var(--chip-i, 0) * 14ms);
+      }
+
+      @keyframes tech-chip-in {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow-x: visible;
+        overflow-y: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        cursor: none;
+      }
+
+      button,
+      input,
+      a {
+        cursor: none;
+        font-family: inherit;
+      }
+
+      /* Custom cursor */
+      .cursor-dot,
+      .cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 20000;
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        will-change: left, top;
+      }
+
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+
+      .cursor-ring {
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(255, 79, 0, 0.35);
+        border-radius: 50%;
+      }
+
+      .app {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        height: 100dvh;
+        overflow: visible;
+      }
+
+      /* Header — logo left, tagline centered on viewport */
+      .header {
+        flex-shrink: 0;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        height: var(--header-h);
+        min-height: var(--header-h);
+        padding: calc(18 * var(--scale)) calc(14 * var(--scale)) 0;
+        box-sizing: border-box;
+      }
+
+      .header-logo {
+        grid-column: 1;
+        justify-self: start;
+        display: block;
+        height: calc(22 * var(--scale));
+        width: auto;
+      }
+
+      .header-logo img {
+        display: block;
+        height: 100%;
+        width: auto;
+      }
+
+      .header-tagline {
+        grid-column: 2;
+        justify-self: center;
+        font-family: var(--font);
+        font-weight: 400;
+        font-style: normal;
+        font-size: calc(18 * var(--scale));
+        line-height: calc(24 * var(--scale));
+        letter-spacing: 0.06em;
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--text-tagline);
+        white-space: nowrap;
+        margin: 0;
+      }
+
+      .header-tagline .tagline-accent {
+        color: var(--accent);
+      }
+
+      /* Stage — fills space between header & footer; content scaled to artboard */
+      .stage {
+        flex: 1 1 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: stretch;
+        padding: 0 calc(14 * var(--scale));
+        min-height: 0;
+        overflow: visible;
+      }
+
+      .stage-inner {
+        width: 100%;
+        max-width: 100%;
+        flex: 1 1 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        overflow: visible;
+      }
+
+      .words-stack {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        overflow: visible;
+      }
+
+      .word-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        overflow: visible;
+      }
+
+      .word-row + .word-row {
+        margin-top: calc(-1 * (var(--row-overlap, var(--word-overlap))));
+      }
+
+      .word-field {
+        display: inline-block;
+        max-width: none;
+        padding: 0 calc(14 * var(--scale));
+        box-sizing: border-box;
+        overflow: visible;
+      }
+
+      .word-input {
+        display: block;
+        width: auto;
+        max-width: none;
+        min-width: 2ch;
+        height: auto;
+        background: transparent;
+        border: none;
+        color: var(--word-color);
+        font-family: var(--font);
+        font-weight: 400;
+        font-style: normal;
+        font-size: var(--word-size);
+        line-height: 1;
+        letter-spacing: calc(-10.5 * var(--scale));
+        text-transform: none;
+        text-align: center;
+        white-space: nowrap;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        text-decoration: underline;
+        text-decoration-color: var(--word-line);
+        text-decoration-thickness: calc(1 * var(--scale));
+        text-decoration-skip-ink: none;
+        text-underline-offset: var(--word-underline-offset);
+        caret-color: var(--accent);
+        box-sizing: content-box;
+        overflow: visible;
+      }
+
+      .word-input::placeholder {
+        color: rgba(219, 219, 219, 0.25);
+      }
+
+      .word-input:focus {
+        text-decoration-color: var(--accent);
+      }
+
+      .word-input.animating {
+        animation: tech-word-rise 0.55s var(--ease-tech) forwards;
+      }
+
+      /* Footer — docked bar, rounded top */
+      .footer {
+        flex-shrink: 0;
+        width: 100%;
+        height: var(--footer-h);
+        min-height: var(--footer-h);
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: calc(6 * var(--scale));
+        padding: calc(14 * var(--scale));
+        padding-bottom: calc(14 * var(--scale));
+        box-sizing: border-box;
+        border-radius: calc(12 * var(--scale)) calc(12 * var(--scale)) 0 0;
+        overflow: hidden;
+      }
+
+      /* Figma 755:81236 — taupe panel, presets only, 148px */
+      .presets-section {
+        flex: 1 1 0;
+        min-width: 0;
+        height: calc(148 * var(--scale));
+        display: flex;
+        flex-direction: column;
+        padding: calc(16 * var(--scale));
+        box-sizing: border-box;
+        background: var(--presets-panel);
+        border: none;
+        border-radius: calc(10 * var(--scale));
+        overflow: hidden;
+      }
+
+      /* Preset grid — 4 columns; gap scales, type never below 14px */
+      .presets-grid {
+        --preset-gap-scale: 1;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, max-content));
+        justify-content: space-between;
+        align-content: start;
+        row-gap: calc(14 * var(--scale) * var(--preset-gap-scale));
+        column-gap: calc(10 * var(--scale) * var(--preset-gap-scale));
+        padding: calc(2 * var(--scale)) 0;
+        box-sizing: border-box;
+        scrollbar-width: none;
+      }
+
+      .presets-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .preset-btn {
+        flex: 0 0 auto;
+        width: max-content;
+        max-width: 100%;
+        overflow: visible;
+        background: transparent;
+        border: none;
+        border-radius: calc(4 * var(--scale));
+        color: var(--text-preset);
+        font-family: var(--font);
+        font-size: max(14px, calc(15 * var(--scale)));
+        font-weight: 400;
+        font-style: normal;
+        line-height: max(20px, calc(23 * var(--scale)));
+        letter-spacing: 0;
+        text-transform: none;
+        padding: 0;
+        min-height: max(20px, calc(23 * var(--scale)));
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(6 * var(--scale));
+        white-space: nowrap;
+        transition: opacity 0.2s;
+      }
+
+      .preset-btn:hover {
+        opacity: 0.65;
+      }
+
+      .preset-btn .sep {
+        flex-shrink: 0;
+        letter-spacing: calc(2 * var(--scale));
+      }
+
+      /* Figma 755:81346 — stacked action column */
+      .actions-column {
+        flex: 0 0 calc(208.238 * var(--scale));
+        width: calc(208.238 * var(--scale));
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: calc(6 * var(--scale));
+        min-height: calc(148 * var(--scale));
+      }
+
+      /* Figma 755:81347 / 755:81353 — horizontal label + arrow */
+      .action-btn {
+        flex: 1 1 0;
+        width: 100%;
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: calc(10 * var(--scale));
+        padding: calc(16 * var(--scale));
+        box-sizing: border-box;
+        color: #000000;
+        transition: filter 0.2s, transform 0.15s;
+      }
+
+      .action-btn:hover {
+        filter: brightness(1.05);
+      }
+
+      .action-btn:active {
+        transform: scale(0.98);
+      }
+
+      .action-btn--remix {
+        background: var(--remix-bg);
+      }
+
+      .action-btn--build {
+        background: var(--accent);
+      }
+
+      .action-btn-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(28 * var(--scale));
+      }
+
+      .action-btn-label {
+        font-family: var(--font);
+        font-weight: 400;
+        font-style: normal;
+        font-size: calc(15 * var(--scale));
+        line-height: calc(23 * var(--scale));
+        letter-spacing: 0;
+        text-transform: uppercase;
+        color: #000000;
+        white-space: nowrap;
+      }
+
+      .action-btn-icon {
+        display: block;
+        flex-shrink: 0;
+        width: calc(21.238 * var(--scale));
+        height: calc(20.564 * var(--scale));
+      }
+
+      /* Builder — fills area below main header */
+      body.builder-active .app .stage,
+      body.builder-active .app .footer {
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      body.builder-active .app .header {
+        position: relative;
+        z-index: 9001;
+      }
+
+      .builder {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 8000;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+        color: var(--word-color);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.35s var(--ease-tech), visibility 0.35s;
+      }
+
+      .builder.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .builder-stage {
+        flex: 1;
+        position: relative;
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: calc(24 * var(--scale)) calc(20 * var(--scale));
+      }
+
+      .builder-grid-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 87, 0, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 87, 0, 0.04) 1px, transparent 1px);
+        background-size: calc(32 * var(--scale)) calc(32 * var(--scale));
+      }
+
+      .builder-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: calc(900 * var(--scale));
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .builder-kicker {
+        font-size: calc(13 * var(--scale));
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 calc(20 * var(--scale));
+      }
+
+      .builder-kicker::before {
+        content: "■ ";
+      }
+
+      .builder-title {
+        font-family: var(--font);
+        font-weight: 400;
+        font-size: clamp(2.5rem, 8vw, calc(72 * var(--scale)));
+        line-height: 0.95;
+        letter-spacing: calc(-2 * var(--scale));
+        text-transform: uppercase;
+        color: var(--word-color);
+        margin: 0 0 calc(36 * var(--scale));
+        word-break: break-word;
+      }
+
+      .builder-title .plus {
+        color: var(--accent);
+      }
+
+      .builder-panel {
+        padding: calc(8 * var(--scale)) 0;
+        margin-bottom: calc(28 * var(--scale));
+      }
+
+      .builder-spec {
+        margin: 0;
+        padding: 0;
+      }
+
+      .builder-spec-row {
+        display: grid;
+        grid-template-columns: minmax(7rem, 28%) 1fr;
+        gap: calc(24 * var(--scale));
+        align-items: baseline;
+        padding: calc(10 * var(--scale)) 0;
+        opacity: 0;
+        transform: translateY(6px);
+        transition:
+          opacity 0.4s var(--ease-tech),
+          transform 0.4s var(--ease-tech);
+      }
+
+      .builder-spec-row.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .builder-spec-row dt {
+        font-size: max(12px, calc(13 * var(--scale)));
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #8a8a8a;
+        text-align: right;
+        margin: 0;
+      }
+
+      .builder-spec-row dd {
+        font-size: max(14px, calc(15 * var(--scale)));
+        line-height: calc(23 * var(--scale));
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--word-color);
+        margin: 0;
+        min-height: calc(23 * var(--scale));
+      }
+
+      .builder-spec-row dd.is-highlight {
+        color: var(--accent);
+      }
+
+      .builder-dots {
+        display: inline-block;
+        width: 1.25em;
+        text-align: left;
+        animation: builder-dots 1s steps(4, end) infinite;
+      }
+
+      @keyframes builder-dots {
+        0% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.2;
+        }
+      }
+
+      .builder-progress {
+        text-align: center;
+        font-size: max(12px, calc(13 * var(--scale)));
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #8a8a8a;
+        margin: 0;
+      }
+
+      .builder-progress.is-ready {
+        color: var(--accent);
+      }
+
+      @media (max-width: 640px) {
+        .builder-spec-row {
+          grid-template-columns: 1fr;
+          gap: calc(4 * var(--scale));
+        }
+
+        .builder-spec-row dt {
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .presets-grid {
+          grid-template-columns: repeat(2, minmax(0, max-content));
+        }
+
+        .footer {
+          flex-wrap: wrap;
+          height: auto;
+          min-height: var(--footer-h);
+        }
+
+        .presets-section {
+          flex: 1 1 100%;
+          height: auto;
+          min-height: calc(148 * var(--scale));
+        }
+
+        .actions-column {
+          flex: 1 1 100%;
+          width: 100%;
+          flex-direction: row;
+          min-height: calc(148 * var(--scale));
+        }
+
+        .action-btn {
+          flex: 1 1 0;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .footer {
+          flex-direction: column;
+        }
+
+        .actions-column {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+    <div class="app">
+      <header class="header">
+        <a href="./" class="header-logo" id="header-logo" data-enter style="--d: 0ms" aria-label="SLATE home">
+          <img src="assets/Logo.svg" alt="SLATE" width="166" height="22" />
+        </a>
+        <p class="header-tagline" data-enter style="--d: 70ms">
+          <span class="tagline-part">3 WORDS, </span><span class="tagline-accent">ONE TRUCK</span>
+        </p>
+      </header>
+
+      <main class="stage">
+        <div class="stage-inner">
+          <div class="words-stack" id="words-stack">
+            <div class="word-row" data-enter style="--d: 200ms">
+              <div class="word-field">
+                <input
+                  type="text"
+                  class="word-input"
+                  id="word-0"
+                  value="Pastel"
+                  maxlength="20"
+                  spellcheck="false"
+                  aria-label="Word 1"
+                />
+              </div>
+            </div>
+            <div class="word-row" data-enter style="--d: 300ms">
+              <div class="word-field">
+                <input
+                  type="text"
+                  class="word-input"
+                  id="word-1"
+                  value="Anime"
+                  maxlength="20"
+                  spellcheck="false"
+                  aria-label="Word 2"
+                />
+              </div>
+            </div>
+            <div class="word-row" data-enter style="--d: 400ms">
+              <div class="word-field">
+                <input
+                  type="text"
+                  class="word-input"
+                  id="word-2"
+                  value="Cats"
+                  maxlength="20"
+                  spellcheck="false"
+                  aria-label="Word 3"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="presets-section" data-enter style="--d: 600ms">
+          <div class="presets-grid" id="presets-grid"></div>
+        </div>
+        <div class="actions-column" data-enter style="--d: 680ms">
+          <button type="button" class="action-btn action-btn--remix" id="btn-remix" data-enter style="--d: 720ms">
+            <span class="action-btn-inner">
+              <span class="action-btn-label">Remix my words</span>
+              <img src="assets/icons/arrow.svg" alt="" class="action-btn-icon" width="21" height="21" />
+            </span>
+          </button>
+          <button type="button" class="action-btn action-btn--build" id="btn-build" data-enter style="--d: 800ms">
+            <span class="action-btn-inner">
+              <span class="action-btn-label">Build my truck</span>
+              <img src="assets/icons/arrow.svg" alt="" class="action-btn-icon" width="21" height="21" />
+            </span>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <div
+      class="builder"
+      id="builder"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="builder-title"
+      hidden
+    >
+      <main class="builder-stage">
+        <div class="builder-grid-bg" aria-hidden="true"></div>
+        <div class="builder-content">
+          <p class="builder-kicker" id="builder-kicker">BUILDING • SLATE AUTO • SIMPLE</p>
+          <h1 class="builder-title" id="builder-title"></h1>
+          <div class="builder-panel">
+            <dl class="builder-spec" id="builder-spec"></dl>
+          </div>
+          <p class="builder-progress" id="builder-progress">0 / 10 • BUILDING</p>
+        </div>
+      </main>
+    </div>
+
+    <style>
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+    </style>
+
+    <script>
+      (function () {
+        function bootAnimations() {
+          var app = document.querySelector(".app");
+          if (!app) return;
+          requestAnimationFrame(function () {
+            app.classList.add("is-booted");
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", bootAnimations);
+        } else {
+          bootAnimations();
+        }
+
+        var PRESETS = [
+          ["GRAVEL", "GRIT", "GLORY"],
+          ["MICHIGAN", "FOOTBALL", "ORANGE"],
+          ["MIDNIGHT", "OIL", "STEEL"],
+          ["SUNSET", "DUST", "ROAD"],
+          ["WILD", "OPEN", "FREE"],
+          ["RUST", "BONE", "IRON"],
+          ["COAST", "SALT", "WIND"],
+          ["NEON", "CITY", "NIGHT"],
+          ["HONEST", "HARD", "TRUE"],
+          ["PASTEL", "ANIME", "CATS"],
+          ["FAST", "LOUD", "BOLD"],
+          ["COLD", "DARK", "DEEP"],
+          ["GOLD", "FIRE", "ICE"],
+          ["MOSS", "CLAY", "STONE"],
+          ["WARM", "SOFT", "CALM"],
+          ["SHARP", "RAW", "PURE"],
+          ["BLUE", "SKY", "RUN"],
+          ["RED", "CLAY", "SUN"],
+          ["LAKE", "FOG", "RAIN"],
+          ["DIRT", "BIKE", "AXE"],
+          ["JAZZ", "SOUL", "FUNK"],
+          ["MIST", "PINE", "HILL"],
+        ];
+
+        var WORD_POOL = [
+          "PASTEL", "CATS", "ANIME", "GRAVEL", "GRIT", "GLORY", "STEEL", "RUST",
+          "HONEST", "WILD", "FREE", "NEON", "DUST", "ROAD", "COAST", "WIND",
+          "IRON", "BONE", "TRUE", "HARD", "OPEN", "NIGHT", "CITY", "SALT",
+          "ORANGE", "BLUE", "FIRE", "ICE", "GOLD", "MOSS", "CLAY", "STONE",
+          "FAST", "SLOW", "LOUD", "CALM", "BOLD", "RAW", "PURE", "DEEP",
+          "HIGH", "LOW", "WARM", "COLD", "BRIGHT", "DARK", "SHARP", "SOFT",
+        ];
+
+        var wordInputs = [
+          document.getElementById("word-0"),
+          document.getElementById("word-1"),
+          document.getElementById("word-2"),
+        ];
+        var presetsGrid = document.getElementById("presets-grid");
+        var btnRemix = document.getElementById("btn-remix");
+        var btnBuild = document.getElementById("btn-build");
+        var builder = document.getElementById("builder");
+        var builderTitle = document.getElementById("builder-title");
+        var builderSpec = document.getElementById("builder-spec");
+        var builderProgress = document.getElementById("builder-progress");
+        var builderRunId = 0;
+
+        function toTitleCase(str) {
+          return (str || "")
+            .toLowerCase()
+            .replace(/(?:^|\s)\S/g, function (c) {
+              return c.toUpperCase();
+            });
+        }
+
+        function getWords() {
+          return wordInputs.map(function (el) {
+            var t = (el.value || "").trim();
+            return t ? toTitleCase(t) : "—";
+          });
+        }
+
+        var DESIGN_WORD_SIZE = 217.033;
+        var DESIGN_WORD_TRACKING = -10.5;
+        var DESIGN_WORD_ROW_GAP = 140;
+
+        function rowOverlapPx(rowH) {
+          return Math.max(0, rowH - DESIGN_WORD_ROW_GAP);
+        }
+
+        function getScale() {
+          return Math.min(window.innerWidth / 1432, window.innerHeight / 996);
+        }
+
+        function baseWordFontPx() {
+          return DESIGN_WORD_SIZE * getScale();
+        }
+
+        var measureEl = null;
+        function measureText(text, fontSizePx, letterSpacingPx) {
+          if (!measureEl) {
+            measureEl = document.createElement("span");
+            measureEl.setAttribute("aria-hidden", "true");
+            measureEl.style.cssText =
+              "position:absolute;left:-99999px;top:0;visibility:hidden;white-space:nowrap;pointer-events:none;font-family:var(--font);font-weight:400;text-transform:none;";
+            document.body.appendChild(measureEl);
+          }
+          measureEl.style.fontSize = fontSizePx + "px";
+          measureEl.style.letterSpacing = letterSpacingPx + "px";
+          measureEl.textContent = text || " ";
+          return { w: measureEl.offsetWidth, h: fontSizePx * 0.99 };
+        }
+
+        function applyWordMetrics(input, fs) {
+          var row = input.closest(".word-row");
+          var text = toTitleCase(input.value || " ");
+          var ls = (DESIGN_WORD_TRACKING / DESIGN_WORD_SIZE) * fs;
+          var measured = measureText(text, fs, ls);
+          var widthPad = Math.max(12, Math.ceil(fs * 0.06));
+          input.style.fontSize = fs + "px";
+          input.style.letterSpacing = ls + "px";
+          input.style.width = Math.ceil(measured.w + widthPad) + "px";
+          if (row) {
+            row.style.setProperty("--row-overlap", rowOverlapPx(fs * 0.99) + "px");
+          }
+        }
+
+        function fitWordInput(input) {
+          var stack = document.getElementById("words-stack");
+          if (!stack) return;
+          var maxW = stack.clientWidth;
+          var scaleThreshold = maxW * 0.8;
+          var text = toTitleCase(input.value || " ");
+          var fs = baseWordFontPx();
+          var ls = (DESIGN_WORD_TRACKING / DESIGN_WORD_SIZE) * fs;
+          var textW = measureText(text, fs, ls).w;
+
+          if (textW <= scaleThreshold) {
+            applyWordMetrics(input, fs);
+            return;
+          }
+
+          var minSize = 16 * getScale();
+          var guard = 0;
+          while (guard < 600 && fs > minSize && measureText(text, fs, ls).w > maxW) {
+            fs -= 1;
+            ls = (DESIGN_WORD_TRACKING / DESIGN_WORD_SIZE) * fs;
+            guard++;
+          }
+          applyWordMetrics(input, fs);
+        }
+
+        function fitAllWords() {
+          wordInputs.forEach(function (input) {
+            input.style.fontSize = "";
+            input.style.letterSpacing = "";
+            input.style.width = "";
+            var row = input.closest(".word-row");
+            if (row) row.style.removeProperty("--row-overlap");
+          });
+          wordInputs.forEach(fitWordInput);
+        }
+
+        function setWords(words, animate) {
+          words.forEach(function (w, i) {
+            wordInputs[i].value = toTitleCase(w);
+            if (animate) {
+              wordInputs[i].classList.remove("animating");
+              void wordInputs[i].offsetWidth;
+              wordInputs[i].classList.add("animating");
+              wordInputs[i].addEventListener(
+                "animationend",
+                function () {
+                  wordInputs[i].classList.remove("animating");
+                  fitWordInput(wordInputs[i]);
+                },
+                { once: true }
+              );
+            }
+          });
+          requestAnimationFrame(fitAllWords);
+        }
+
+        wordInputs.forEach(function (input) {
+          input.addEventListener("input", function () {
+            var start = input.selectionStart;
+            var end = input.selectionEnd;
+            input.value = toTitleCase(input.value);
+            input.setSelectionRange(start, end);
+            fitWordInput(input);
+          });
+        });
+
+        window.addEventListener("resize", function () {
+          requestAnimationFrame(fitAllWords);
+        });
+
+        if (typeof ResizeObserver !== "undefined") {
+          var ro = new ResizeObserver(function () {
+            requestAnimationFrame(fitAllWords);
+          });
+          var stack = document.getElementById("words-stack");
+          var stage = document.querySelector(".stage");
+          if (stack) ro.observe(stack);
+          if (stage) ro.observe(stage);
+        }
+
+        requestAnimationFrame(fitAllWords);
+
+        function formatPresetLabel(words) {
+          return words
+            .map(function (w) {
+              return w.charAt(0) + w.slice(1).toLowerCase();
+            })
+            .join(" / ");
+        }
+
+        function presetBtnHtml(words) {
+          var parts = words.map(function (w) {
+            return w.charAt(0) + w.slice(1).toLowerCase();
+          });
+          return (
+            '<span>' +
+            parts[0] +
+            '</span><span class="sep">/</span><span>' +
+            parts[1] +
+            '</span><span class="sep">/</span><span>' +
+            parts[2] +
+            "</span>"
+          );
+        }
+
+        PRESETS.slice(0, 16).forEach(function (preset, i) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "preset-btn";
+          btn.innerHTML = presetBtnHtml(preset);
+          btn.style.setProperty("--chip-i", String(i));
+          btn.setAttribute("aria-label", formatPresetLabel(preset));
+          btn.addEventListener("click", function () {
+            setWords(preset, true);
+          });
+          presetsGrid.appendChild(btn);
+        });
+
+        function fitPresetsGrid() {
+          if (!presetsGrid) return;
+          presetsGrid.style.setProperty("--preset-gap-scale", "1");
+          var guard = 0;
+          while (
+            presetsGrid.scrollHeight > presetsGrid.clientHeight + 1 &&
+            guard < 50
+          ) {
+            var fit = parseFloat(
+              getComputedStyle(presetsGrid).getPropertyValue("--preset-gap-scale") ||
+                "1"
+            );
+            if (fit <= 0.35) break;
+            presetsGrid.style.setProperty("--preset-gap-scale", String(fit - 0.05));
+            guard++;
+          }
+        }
+
+        requestAnimationFrame(fitPresetsGrid);
+        window.addEventListener("resize", function () {
+          requestAnimationFrame(fitPresetsGrid);
+        });
+
+        if (typeof ResizeObserver !== "undefined" && presetsGrid) {
+          var presetsRo = new ResizeObserver(function () {
+            requestAnimationFrame(fitPresetsGrid);
+          });
+          var presetsSection = presetsGrid.closest(".presets-section");
+          if (presetsSection) presetsRo.observe(presetsSection);
+        }
+
+        function randomFromPool(count, exclude) {
+          var pool = WORD_POOL.filter(function (w) {
+            return exclude.indexOf(w) === -1;
+          });
+          var picked = [];
+          while (picked.length < count && pool.length > 0) {
+            var i = Math.floor(Math.random() * pool.length);
+            picked.push(pool.splice(i, 1)[0]);
+          }
+          while (picked.length < count) {
+            picked.push(WORD_POOL[Math.floor(Math.random() * WORD_POOL.length)]);
+          }
+          return picked;
+        }
+
+        btnRemix.addEventListener("click", function () {
+          setWords(randomFromPool(3, []), true);
+        });
+
+        document.fonts.ready.then(function () {
+          requestAnimationFrame(fitAllWords);
+        });
+
+        var NAMEPLATES = [
+          "CLAY HAULER",
+          "ROAD BUILDER",
+          "DUST RUNNER",
+          "GRID HAULER",
+          "FIELD UNIT",
+          "WORKHORSE",
+        ];
+
+        var BUILD_SPEC = [
+          { key: "INPUT", highlight: true },
+          { key: "MATCH", loading: true, resolve: function () { return "SCANNING BUILD MAP..."; } },
+          { key: "FRAME", resolve: function () { return "PRIMER • SIDE • 8 SLOTS"; } },
+          { key: "LOCK", loading: true, resolve: function () { return "WRITING BUILD SHEET..."; } },
+          { key: "WRAP", resolve: function () { return pickOne(["CREAM", "WHITE", "MATTE BLACK", "STONE"]); } },
+          { key: "ROOF", resolve: function () { return pickOne(["STANDARD", "HIGH", "LOW PROFILE"]); } },
+          {
+            key: "NAMEPLATE",
+            resolve: function (words) {
+              return pickOne(NAMEPLATES);
+            },
+          },
+          { key: "STEP", resolve: function () { return "NONE"; } },
+          { key: "SPARE", resolve: function () { return "NONE"; } },
+          { key: "BED", resolve: function () { return pickOne(["TOOLBOX", "FLAT BED", "LINER"]); } },
+        ];
+
+        function pickOne(list) {
+          return list[Math.floor(Math.random() * list.length)];
+        }
+
+        function wordsToTitleHtml(words) {
+          return words
+            .map(function (w, i) {
+              var part = escapeHtml(w.toUpperCase());
+              return i > 0 ? '<span class="plus"> + </span>' + part : part;
+            })
+            .join("");
+        }
+
+        function wordsToInputValue(words) {
+          return words.map(function (w) { return w.toUpperCase(); }).join(" • ");
+        }
+
+        function escapeHtml(str) {
+          return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        function buildSpecMarkup(words) {
+          builderSpec.innerHTML = BUILD_SPEC.map(function (item, i) {
+            return (
+              '<div class="builder-spec-row" data-step="' +
+              i +
+              '"><dt>' +
+              item.key +
+              '</dt><dd id="builder-val-' +
+              i +
+              '"></dd></div>'
+            );
+          }).join("");
+        }
+
+        function setBuilderProgress(step, total, label) {
+          builderProgress.textContent = step + " / " + total + " • " + label;
+          builderProgress.classList.toggle("is-ready", label === "READY");
+        }
+
+        function revealSpecRow(index, value, options) {
+          var row = builderSpec.querySelector('[data-step="' + index + '"]');
+          var cell = document.getElementById("builder-val-" + index);
+          if (!row || !cell) return;
+          var item = BUILD_SPEC[index];
+          cell.className = "";
+          if (item.highlight) cell.classList.add("is-highlight");
+          if (options && options.loading) {
+            cell.classList.add("is-loading");
+            cell.textContent = value;
+            cell.innerHTML = escapeHtml(value) + '<span class="builder-dots">...</span>';
+          } else {
+            cell.textContent = value;
+          }
+          row.classList.add("is-visible");
+        }
+
+        function wait(ms) {
+          return new Promise(function (resolve) {
+            window.setTimeout(resolve, ms);
+          });
+        }
+
+        function runBuilderSequence(words) {
+          var run = ++builderRunId;
+          var total = BUILD_SPEC.length;
+          buildSpecMarkup(words);
+          builderTitle.innerHTML = wordsToTitleHtml(words);
+          setBuilderProgress(0, total, "BUILDING");
+
+          BUILD_SPEC.reduce(function (chain, item, index) {
+            return chain.then(function () {
+              if (run !== builderRunId) return;
+              var value =
+                item.key === "INPUT"
+                  ? wordsToInputValue(words)
+                  : item.resolve(words);
+              revealSpecRow(index, value, { loading: item.loading });
+              setBuilderProgress(index + 1, total, "BUILDING");
+              var delay = item.loading ? 1400 : 520;
+              return wait(delay).then(function () {
+                if (run !== builderRunId) return;
+                if (item.loading) {
+                  var cell = document.getElementById("builder-val-" + index);
+                  if (cell) {
+                    cell.classList.remove("is-loading");
+                    cell.textContent = value;
+                  }
+                }
+              });
+            });
+          }, Promise.resolve()).then(function () {
+            if (run !== builderRunId) return;
+            setBuilderProgress(total, total, "READY");
+          });
+        }
+
+        function openBuilder() {
+          var words = getWords();
+          builder.hidden = false;
+          builder.classList.add("is-open");
+          document.body.classList.add("builder-active");
+          document.body.style.overflow = "hidden";
+          runBuilderSequence(words);
+        }
+
+        function closeBuilder() {
+          builderRunId += 1;
+          builder.classList.remove("is-open");
+          builder.hidden = true;
+          document.body.classList.remove("builder-active");
+          document.body.style.overflow = "";
+          builderSpec.innerHTML = "";
+          builderTitle.innerHTML = "";
+          builderProgress.classList.remove("is-ready");
+        }
+
+        btnBuild.addEventListener("click", openBuilder);
+
+        var headerLogo = document.getElementById("header-logo");
+        headerLogo.addEventListener("click", function (e) {
+          if (builder.classList.contains("is-open")) {
+            e.preventDefault();
+            closeBuilder();
+          }
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && builder.classList.contains("is-open")) {
+            closeBuilder();
+          }
+        });
+
+        /* Custom cursor with lerp */
+        var dot = document.getElementById("cursor-dot");
+        var ring = document.getElementById("cursor-ring");
+        var mouseX = 0;
+        var mouseY = 0;
+        var dotX = 0;
+        var dotY = 0;
+        var ringX = 0;
+        var ringY = 0;
+
+        function showCursor() {
+          dot.style.opacity = "1";
+          ring.style.opacity = "1";
+        }
+
+        function hideCursor() {
+          dot.style.opacity = "0";
+          ring.style.opacity = "0";
+        }
+
+        document.addEventListener("mousemove", function (e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          showCursor();
+        });
+
+        function lerp(a, b, t) {
+          return a + (b - a) * t;
+        }
+
+        function animateCursor() {
+          dotX = lerp(dotX, mouseX, 0.35);
+          dotY = lerp(dotY, mouseY, 0.35);
+          ringX = lerp(ringX, mouseX, 0.12);
+          ringY = lerp(ringY, mouseY, 0.12);
+          dot.style.left = dotX + "px";
+          dot.style.top = dotY + "px";
+          ring.style.left = ringX + "px";
+          ring.style.top = ringY + "px";
+          requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        window.addEventListener("mouseout", function (e) {
+          if (!e.relatedTarget) hideCursor();
+        });
+        window.addEventListener("mouseover", function () {
+          showCursor();
+        });
+        window.addEventListener("blur", hideCursor);
+      })();
+    </script>
+  </body>
+</html>

@@ -129,6 +129,11 @@
   text-align: center;
 }
 
+.password-submit-fun,
+.password-splash-line {
+  display: none;
+}
+
 *,
 *::before,
 *::after {

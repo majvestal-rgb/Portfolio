@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maj Vestal</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <script>
+      try { localStorage.setItem("mv_aesthetic", "neo"); } catch (e) {}
+    </script>
+    <script src="./theme.js?v=4"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./theme-neo.css?v=41" />
+    <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
+    <script>
+      (function () {
+        var m = sessionStorage.getItem("mv_portfolio");
+        if (m !== "full") {
+          window.location.replace(m === "locked" ? "misc.html" : "index.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="neo-landing">
+    <div class="neo-home">
+      <div class="neo-board">
+        <div class="neo-panel neo-rail">
+          <nav class="neo-home-links" aria-label="Personal site">
+            <a href="paintings.html">Paintings</a>
+            <a href="sketchbook.html">Sketchbook</a>
+            <a href="writing.html">Writing</a>
+            <a href="illustration.html">Illustration</a>
+            <a href="threed.html">3D</a>
+            <a href="library.html">Library</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <div class="neo-player">
+            <img class="neo-player-skin" src="assets/player/leaf.png" alt="" />
+            <div class="neo-player-screen">
+              <p class="neo-player-kicker">Towa Tei</p>
+              <p class="neo-player-title">Luv Connection</p>
+              <p class="neo-player-time" id="neo-time">0:00</p>
+            </div>
+            <button type="button" id="neo-play" class="neo-player-play" aria-pressed="false" aria-label="Play"></button>
+            <audio id="neo-audio" src="assets/audio/Towa_Tei_-_Luv_Connection_(mp3.pm).mp3" loop preload="none"></audio>
+          </div>
+        </div>
+
+        <section class="neo-panel neo-home-col">
+          <header class="neo-home-mark">
+            <h1>Maj Vestal</h1>
+          </header>
+          <p class="neo-home-blurb">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+        </section>
+
+        <div class="neo-side">
+          <section class="neo-panel neo-guest" aria-label="Guestbook">
+            <div class="neo-guest-list" id="neo-guest-list"></div>
+            <form class="neo-guest-form" id="neo-guest-form">
+              <div class="neo-guest-bar">
+                <span class="neo-guest-title">guestbook</span>
+              </div>
+              <label class="neo-guest-field">
+                <span aria-hidden="true">☺</span>
+                <input type="text" name="name" maxlength="32" placeholder="name" autocomplete="nickname" required />
+              </label>
+              <label class="neo-guest-field">
+                <span aria-hidden="true">›</span>
+                <input type="text" name="message" maxlength="240" placeholder="message" required />
+              </label>
+              <input class="neo-guest-honey" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              <button type="submit" class="neo-guest-send">leave it</button>
+            </form>
+          </section>
+
+          <a class="neo-ad" href="cats.html" aria-label="Freak cats">
+            <p class="neo-ad-label">advertisement</p>
+            <div class="neo-ad-box">
+              <p class="neo-ad-head"><span class="neo-ad-blink">★</span> freak cats <span class="neo-ad-blink">★</span></p>
+              <div class="neo-ad-pics">
+                <span class="neo-ad-shot">
+                  <img src="assets/cats/IMG_7367.jpeg" alt="orange and white cat" />
+                </span>
+                <span class="neo-ad-shot">
+                  <img src="assets/cats/Screenshot%202026-11-21%20at%201.50.55%E2%80%AFPM.png" alt="orange and white cat" />
+                </span>
+              </div>
+              <p class="neo-ad-cta neo-ad-blink">click here!!!</p>
+              <p class="neo-ad-fine">strange cats live here</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="neo-home-marquee" aria-hidden="true">
+        <span>
+          <span>★ welcome ★ thank you for visiting ^_^ ★ </span>
+          <span>★ welcome ★ thank you for visiting ^_^ ★ </span>
+        </span>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var audio = document.getElementById("neo-audio");
+        var play = document.getElementById("neo-play");
+        play.addEventListener("click", function () {
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+        var time = document.getElementById("neo-time");
+        function clock(seconds) {
+          var s = Math.max(0, Math.floor(seconds || 0));
+          var m = Math.floor(s / 60);
+          s = s % 60;
+          return m + ":" + (s < 10 ? "0" : "") + s;
+        }
+        function paint() {
+          var on = !audio.paused;
+          play.setAttribute("aria-pressed", on ? "true" : "false");
+          play.setAttribute("aria-label", on ? "Pause" : "Play");
+          time.textContent = clock(audio.currentTime);
+        }
+        audio.addEventListener("play", paint);
+        audio.addEventListener("pause", paint);
+        audio.addEventListener("timeupdate", paint);
+
+        var KEY = "mv_guestbook";
+        var list = document.getElementById("neo-guest-list");
+        var form = document.getElementById("neo-guest-form");
+
+        function load() {
+          try {
+            var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+            if (Array.isArray(saved) && saved.length) {
+              saved.forEach(function (item) {
+                if (item && item.text && item.text.indexOf("this is the personal page") !== -1) {
+                  item.text = "leave a note if you feel like it.";
+                }
+              });
+              return saved;
+            }
+          } catch (e) {}
+          return [
+            {
+              name: "maj",
+              text: "leave a note if you feel like it.",
+              at: Date.now()
+            }
+          ];
+        }
+
+        function save(items) {
+          try {
+            localStorage.setItem(KEY, JSON.stringify(items.slice(0, 40)));
+          } catch (e) {}
+        }
+
+        function esc(s) {
+          return String(s).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+          });
+        }
+
+        function ago(at) {
+          var s = Math.max(0, Math.round((Date.now() - at) / 1000));
+          if (s < 45) return "just now";
+          var m = Math.round(s / 60);
+          if (m < 60) return m + " minute" + (m === 1 ? "" : "s") + " ago";
+          var h = Math.round(m / 60);
+          if (h < 24) return h + " hour" + (h === 1 ? "" : "s") + " ago";
+          var d = Math.round(h / 24);
+          if (d < 14) return d + " day" + (d === 1 ? "" : "s") + " ago";
+          var w = Math.round(d / 7);
+          return w + " week" + (w === 1 ? "" : "s") + " ago";
+        }
+
+        function render(items) {
+          list.innerHTML = items
+            .map(function (item) {
+              return (
+                '<article class="neo-guest-note">' +
+                '<header><strong>' +
+                esc(item.name) +
+                "</strong><time>" +
+                esc(ago(item.at)) +
+                "</time></header><p>" +
+                esc(item.text) +
+                "</p></article>"
+              );
+            })
+            .join("");
+          list.scrollTop = 0;
+        }
+
+        var notes = load();
+        save(notes);
+        render(notes);
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (form.company && form.company.value) return;
+          var name = form.name.value.trim().slice(0, 32);
+          var text = form.message.value.trim().slice(0, 240);
+          if (!name || !text) return;
+          notes.unshift({ name: name, text: text, at: Date.now() });
+          notes = notes.slice(0, 40);
+          save(notes);
+          render(notes);
+          form.reset();
+        });
+      })();
+    </script>
+  </body>
+</html>

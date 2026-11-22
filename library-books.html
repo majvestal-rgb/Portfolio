@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books – Maj Vestal</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <script>
+      try { localStorage.setItem("mv_aesthetic", "neo"); } catch (e) {}
+    </script>
+    <script src="./theme.js?v=6"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./theme-neo.css?v=24" />
+    <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
+    <script>
+      (function () {
+        var m = sessionStorage.getItem("mv_portfolio");
+        if (m !== "full") {
+          window.location.replace(m === "locked" ? "misc.html" : "index.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="neo-personal neo-shelf">
+    <nav class="nav" aria-label="Leave this room">
+      <a class="nav-link neo-back" href="fun.html">back to home</a>
+    </nav>
+    <main class="shelf" id="shelf" data-kind="Books"></main>
+    <script>
+      (function () {
+        var items = [
+          {
+                    "src": "assets/library/books/343.jpg",
+                    "title": "Perfume: The Story of a Murderer",
+                    "by": "Patrick Süskind"
+          },
+          {
+                    "src": "assets/library/books/77566.jpg",
+                    "title": "Hyperion (Hyperion Cantos, #1)",
+                    "by": "Dan Simmons"
+          },
+          {
+                    "src": "assets/library/books/320.jpg",
+                    "title": "One Hundred Years of Solitude",
+                    "by": "Gabriel García Márquez"
+          },
+          {
+                    "src": "assets/library/books/29127.jpg",
+                    "title": "The Last Unicorn (The Last Unicorn, #1)",
+                    "by": "Peter S. Beagle"
+          },
+          {
+                    "src": "assets/library/books/14185.jpg",
+                    "title": "The Three Stigmata of Palmer Eldritch",
+                    "by": "Philip K. Dick"
+          },
+          {
+                    "src": "assets/library/books/2266967.jpg",
+                    "title": "The Other Side of the Mountain",
+                    "by": "Michel Bernanos"
+          },
+          {
+                    "src": "assets/library/books/59924.jpg",
+                    "title": "The Lathe of Heaven",
+                    "by": "Ursula K. Le Guin"
+          },
+          {
+                    "src": "assets/library/books/636223.jpg",
+                    "title": "Ice",
+                    "by": "Anna Kavan"
+          },
+          {
+                    "src": "assets/library/books/6763725.jpg",
+                    "title": "Capitalist Realism: Is There No Alternative?",
+                    "by": "Mark Fisher"
+          },
+          {
+                    "src": "assets/library/books/240266768.jpg",
+                    "title": "A Forsaken Prophecy (The Artisan Trilogy, #2)",
+                    "by": "Stacey McEwan"
+          },
+          {
+                    "src": "assets/library/books/70535.jpg",
+                    "title": "2001: A Space Odyssey (Space Odyssey, #1)",
+                    "by": "Arthur C. Clarke"
+          },
+          {
+                    "src": "assets/library/books/41812831.jpg",
+                    "title": "The Hundred Years’ War on Palestine: A History of Settler Colonialism and Resistance, 1917–2017",
+                    "by": "Rashid Khalidi"
+          },
+          {
+                    "src": "assets/library/books/4406.jpg",
+                    "title": "East of Eden",
+                    "by": "John Steinbeck"
+          },
+          {
+                    "src": "assets/library/books/29845449.jpg",
+                    "title": "The Weird and the Eerie",
+                    "by": "Mark Fisher"
+          },
+          {
+                    "src": "assets/library/books/22590.jpg",
+                    "title": "Ubik",
+                    "by": "Philip K. Dick"
+          },
+          {
+                    "src": "assets/library/books/60931.jpg",
+                    "title": "Kindred",
+                    "by": "Octavia E. Butler"
+          },
+          {
+                    "src": "assets/library/books/77013.jpg",
+                    "title": "As I Lay Dying",
+                    "by": "William Faulkner"
+          },
+          {
+                    "src": "assets/library/books/58393493.jpg",
+                    "title": "Pure Invention: How Japan Made the Modern World",
+                    "by": "Matt Alt"
+          },
+          {
+                    "src": "assets/library/books/86598.jpg",
+                    "title": "Discourse on Colonialism",
+                    "by": "Aimé Césaire"
+          },
+          {
+                    "src": "assets/library/books/117833.jpg",
+                    "title": "The Master and Margarita",
+                    "by": "Mikhail Bulgakov"
+          },
+          {
+                    "src": "assets/library/books/5297.jpg",
+                    "title": "The Picture of Dorian Gray",
+                    "by": "Oscar Wilde"
+          },
+          {
+                    "src": "assets/library/books/250024.jpg",
+                    "title": "The City and the Stars",
+                    "by": "Arthur C. Clarke"
+          },
+          {
+                    "src": "assets/library/books/179612.jpg",
+                    "title": "The State and Revolution",
+                    "by": "Vladimir Lenin"
+          },
+          {
+                    "src": "assets/library/books/3263607.jpg",
+                    "title": "The Fellowship of the Ring (The Lord of the Rings, #1)",
+                    "by": "J.R.R. Tolkien"
+          },
+          {
+                    "src": "assets/library/books/406235.jpg",
+                    "title": "Giovanni’s Room",
+                    "by": "James Baldwin"
+          },
+          {
+                    "src": "assets/library/books/35031085.jpg",
+                    "title": "Frankenstein",
+                    "by": "Mary Wollstonecraft Shelley"
+          },
+          {
+                    "src": "assets/library/books/35036409.jpg",
+                    "title": "My Brilliant Friend (Neapolitan Novels, #1)",
+                    "by": "Elena Ferrante"
+          },
+          {
+                    "src": "assets/library/books/4009.jpg",
+                    "title": "Nine Stories",
+                    "by": "J.D. Salinger"
+          },
+          {
+                    "src": "assets/library/books/2834255.jpg",
+                    "title": "JFK and the Unspeakable: Why He Died & Why It Matters",
+                    "by": "James W. Douglass"
+          },
+          {
+                    "src": "assets/library/books/166997.jpg",
+                    "title": "Stoner",
+                    "by": "John  Williams"
+          },
+          {
+                    "src": "assets/library/books/139569.jpg",
+                    "title": "Stone Butch Blues",
+                    "by": "Leslie Feinberg"
+          },
+          {
+                    "src": "assets/library/books/30474.jpg",
+                    "title": "The Communist Manifesto",
+                    "by": "Karl Marx"
+          },
+          {
+                    "src": "assets/library/books/9998.jpg",
+                    "title": "The Woman in the Dunes",
+                    "by": "Kōbō Abe"
+          },
+          {
+                    "src": "assets/library/books/153425.jpg",
+                    "title": "Near to the Wild Heart",
+                    "by": "Clarice Lispector"
+          },
+          {
+                    "src": "assets/library/books/28251250.jpg",
+                    "title": "White Noise",
+                    "by": "Don DeLillo"
+          },
+          {
+                    "src": "assets/library/books/34439.jpg",
+                    "title": "Oedipus the King",
+                    "by": "Sophocles"
+          },
+          {
+                    "src": "assets/library/books/74186.jpg",
+                    "title": "Man in the Holocene",
+                    "by": "Max Frisch"
+          },
+          {
+                    "src": "assets/library/books/5129.jpg",
+                    "title": "Brave New World",
+                    "by": "Aldous Huxley"
+          },
+          {
+                    "src": "assets/library/books/52635.jpg",
+                    "title": "The Hellbound Heart (Hellraiser #1)",
+                    "by": "Clive Barker"
+          },
+          {
+                    "src": "assets/library/books/11337.jpg",
+                    "title": "The Bluest Eye",
+                    "by": "Toni Morrison"
+          },
+          {
+                    "src": "assets/library/books/95558.jpg",
+                    "title": "Solaris",
+                    "by": "Stanisław Lem"
+          },
+          {
+                    "src": "assets/library/books/57615568.jpg",
+                    "title": "Collapse: The Fall of the Soviet Union",
+                    "by": "Vladislav M. Zubok"
+          },
+          {
+                    "src": "assets/library/books/55251789.jpg",
+                    "title": "Terminal Boredom: Stories",
+                    "by": "Izumi Suzuki"
+          },
+          {
+                    "src": "assets/library/books/11036817.jpg",
+                    "title": "Hillbilly Nationalists, Urban Race Rebels, and Black Power: Community Organizing in Radical Times",
+                    "by": "Amy Sonnie"
+          },
+          {
+                    "src": "assets/library/books/75614166.jpg",
+                    "title": "Seeing <―> Making: Room for Thought",
+                    "by": "Susan Buck-Morss"
+          },
+          {
+                    "src": "assets/library/books/563730.jpg",
+                    "title": "Closer",
+                    "by": "Dennis Cooper"
+          },
+          {
+                    "src": "assets/library/books/30118.jpg",
+                    "title": "A Light in the Attic",
+                    "by": "Shel Silverstein"
+          },
+          {
+                    "src": "assets/library/books/251688.jpg",
+                    "title": "Breakfast at Tiffany’s and Three Stories",
+                    "by": "Truman Capote"
+          },
+          {
+                    "src": "assets/library/books/7624.jpg",
+                    "title": "Lord of the Flies",
+                    "by": "William Golding"
+          },
+          {
+                    "src": "assets/library/books/331256.jpg",
+                    "title": "Roadside Picnic",
+                    "by": "Arkady Strugatsky"
+          },
+          {
+                    "src": "assets/library/books/395960.jpg",
+                    "title": "Mouchette",
+                    "by": "Georges Bernanos"
+          },
+          {
+                    "src": "assets/library/books/60165391.jpg",
+                    "title": "Survival of the Richest: Escape Fantasies of the Tech Billionaires",
+                    "by": "Douglas Rushkoff"
+          },
+          {
+                    "src": "assets/library/books/8848595.jpg",
+                    "title": "Fatale",
+                    "by": "Jean-Patrick Manchette"
+          },
+          {
+                    "src": "assets/library/books/19217873.jpg",
+                    "title": "The Price of Salt, or Carol",
+                    "by": "Claire  Morgan"
+          },
+          {
+                    "src": "assets/library/books/7805.jpg",
+                    "title": "Pale Fire",
+                    "by": "Vladimir Nabokov"
+          },
+          {
+                    "src": "assets/library/books/18839.jpg",
+                    "title": "Orlando",
+                    "by": "Virginia Woolf"
+          },
+          {
+                    "src": "assets/library/books/4274612.jpg",
+                    "title": "Family of Secrets: The Bush Dynasty, the Powerful Forces That Put it in the White House & What Their Influence Means for America",
+                    "by": "Russ Baker"
+          },
+          {
+                    "src": "assets/library/books/29726952.jpg",
+                    "title": "The World of Edena",
+                    "by": "Mœbius"
+          },
+          {
+                    "src": "assets/library/books/60827532.jpg",
+                    "title": "On Women",
+                    "by": "Susan Sontag"
+          },
+          {
+                    "src": "assets/library/books/845485.jpg",
+                    "title": "Downward to the Earth",
+                    "by": "Robert Silverberg"
+          },
+          {
+                    "src": "assets/library/books/17934530.jpg",
+                    "title": "Annihilation (Southern Reach, #1)",
+                    "by": "Jeff Vandermeer"
+          },
+          {
+                    "src": "assets/library/books/5107.jpg",
+                    "title": "The Catcher in the Rye",
+                    "by": "J.D. Salinger"
+          },
+          {
+                    "src": "assets/library/books/17961.jpg",
+                    "title": "Collected Fictions",
+                    "by": "Jorge Luis Borges"
+          },
+          {
+                    "src": "assets/library/books/48855.jpg",
+                    "title": "The Diary of a Young Girl",
+                    "by": "Anne Frank"
+          },
+          {
+                    "src": "assets/library/books/541024.jpg",
+                    "title": "More Than Human",
+                    "by": "Theodore Sturgeon"
+          },
+          {
+                    "src": "assets/library/books/1497959.jpg",
+                    "title": "An Illustrated History of the Horror Film",
+                    "by": "Carlos Clarens"
+          },
+          {
+                    "src": "assets/library/books/92121.jpg",
+                    "title": "Nine Princes in Amber (The Chronicles of Amber, #1)",
+                    "by": "Roger Zelazny"
+          },
+          {
+                    "src": "assets/library/books/59716.jpg",
+                    "title": "To the Lighthouse",
+                    "by": "Virginia Woolf"
+          },
+          {
+                    "src": "assets/library/books/52036.jpg",
+                    "title": "Siddhartha",
+                    "by": "Hermann Hesse"
+          },
+          {
+                    "src": "assets/library/books/4715395.jpg",
+                    "title": "Segaki",
+                    "by": "David Stacton"
+          },
+          {
+                    "src": "assets/library/books/15241.jpg",
+                    "title": "The Two Towers (The Lord of the Rings, #2)",
+                    "by": "J.R.R. Tolkien"
+          },
+          {
+                    "src": "assets/library/books/17690.jpg",
+                    "title": "The Trial",
+                    "by": "Franz Kafka"
+          },
+          {
+                    "src": "assets/library/books/30119.jpg",
+                    "title": "Where the Sidewalk Ends",
+                    "by": "Shel Silverstein"
+          },
+          {
+                    "src": "assets/library/books/7100367.jpg",
+                    "title": "Down Below",
+                    "by": "Leonora Carrington"
+          },
+          {
+                    "src": "assets/library/books/30120.jpg",
+                    "title": "Falling Up",
+                    "by": "Shel Silverstein"
+          },
+          {
+                    "src": "assets/library/books/56434554.jpg",
+                    "title": "Wuthering Heights",
+                    "by": "Emily Brontë"
+          },
+          {
+                    "src": "assets/library/books/13079982.jpg",
+                    "title": "Fahrenheit 451",
+                    "by": "Ray Bradbury"
+          },
+          {
+                    "src": "assets/library/books/102083.jpg",
+                    "title": "The End of the Story",
+                    "by": "Clark Ashton Smith"
+          },
+          {
+                    "src": "assets/library/books/46987.jpg",
+                    "title": "The Hearing Trumpet",
+                    "by": "Leonora Carrington"
+          },
+          {
+                    "src": "assets/library/books/187149.jpg",
+                    "title": "Open Veins of Latin America: Five Centuries of the Pillage of a Continent",
+                    "by": "Eduardo Galeano"
+          },
+          {
+                    "src": "assets/library/books/194746.jpg",
+                    "title": "No Longer Human",
+                    "by": "Osamu Dazai"
+          },
+          {
+                    "src": "assets/library/books/43015073.jpg",
+                    "title": "Chaos: Charles Manson, the CIA, and the Secret History of the Sixties",
+                    "by": "Tom O'Neill"
+          },
+          {
+                    "src": "assets/library/books/113205.jpg",
+                    "title": "Heart of a Dog",
+                    "by": "Mikhail Bulgakov"
+          },
+          {
+                    "src": "assets/library/books/6324090.jpg",
+                    "title": "Alice's Adventures in Wonderland (Alice's Adventures in Wonderland, #1)",
+                    "by": "Lewis Carroll"
+          },
+          {
+                    "src": "assets/library/books/2657.jpg",
+                    "title": "To Kill a Mockingbird",
+                    "by": "Harper Lee"
+          },
+          {
+                    "src": "assets/library/books/15839976.jpg",
+                    "title": "Red Rising (Red Rising Saga, #1)",
+                    "by": "Pierce Brown"
+          }
+];
+        var root = document.getElementById("shelf");
+        var heading = document.createElement("h1");
+        heading.className = "shelf-title";
+        heading.textContent = root.getAttribute("data-kind");
+        root.appendChild(heading);
+        var grid = document.createElement("div");
+        grid.className = "shelf-grid";
+        var count = items.length || 25;
+        for (var i = 0; i < count; i++) {
+          var item = items[i];
+          var fig = document.createElement("figure");
+          fig.className = "shelf-item" + (item && item.src ? "" : " is-empty");
+          if (item && item.src) {
+            var img = document.createElement("img");
+            img.src = item.src;
+            img.alt = item.title || "";
+            fig.appendChild(img);
+          }
+          if (item && (item.title || item.by)) {
+            var cap = document.createElement("figcaption");
+            if (item.title) cap.appendChild(document.createTextNode(item.title));
+            if (item.by) {
+              cap.appendChild(document.createElement("br"));
+              cap.appendChild(document.createElement("br"));
+              cap.appendChild(document.createTextNode(item.by));
+            }
+            fig.appendChild(cap);
+          }
+          grid.appendChild(fig);
+        }
+        root.appendChild(grid);
+      })();
+    </script>
+  </body>
+</html>

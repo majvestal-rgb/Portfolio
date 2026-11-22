@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music – Maj Vestal</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+    <script>
+      try { localStorage.setItem("mv_aesthetic", "neo"); } catch (e) {}
+    </script>
+    <script src="./theme.js?v=6"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./theme-neo.css?v=39" />
+    <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
+    <script>
+      (function () {
+        var m = sessionStorage.getItem("mv_portfolio");
+        if (m !== "full") {
+          window.location.replace(m === "locked" ? "misc.html" : "index.html");
+        }
+      })();
+    </script>
+  </head>
+  <body class="neo-personal neo-shelf neo-music">
+    <nav class="nav" aria-label="Leave this room">
+      <a class="nav-link neo-back" href="fun.html">back to home</a>
+    </nav>
+    <main class="shelf" id="shelf" data-kind="Music"></main>
+    <script>
+      (function () {
+        var items = [
+          { src: "assets/library/music/lux.jpg", title: "LUX", by: "ROSALÍA" },
+          { src: "assets/library/music/art-angels.jpg", title: "Art Angels", by: "Grimes" },
+          { src: "assets/library/music/ys.jpg", title: "Ys", by: "Joanna Newsom" },
+          { src: "assets/library/music/mayhem.jpg", title: "MAYHEM", by: "Lady Gaga" },
+          { src: "assets/library/music/discovery.jpg", title: "Discovery", by: "Daft Punk" },
+          { src: "assets/library/music/mellon-collie.jpg", title: "Mellon Collie and the Infinite Sadness", by: "The Smashing Pumpkins" },
+          { src: "assets/library/music/eusexua.jpg", title: "EUSEXUA", by: "FKA twigs" },
+          { src: "assets/library/music/eusexua-afterglow.jpg", title: "EUSEXUA Afterglow", by: "FKA twigs" },
+          { src: "assets/library/music/late-night-jazz.jpg", title: "Late Night Jazz (Deluxe Edition)", by: "Chet Baker" },
+          { src: "assets/library/music/drukqs.jpg", title: "Drukqs", by: "Aphex Twin" }
+        ];
+        var root = document.getElementById("shelf");
+        var heading = document.createElement("h1");
+        heading.className = "shelf-title";
+        heading.textContent = root.getAttribute("data-kind");
+        root.appendChild(heading);
+        var grid = document.createElement("div");
+        grid.className = "shelf-grid";
+        var count = items.length || 25;
+        for (var i = 0; i < count; i++) {
+          var item = items[i];
+          var fig = document.createElement("figure");
+          fig.className = "shelf-item" + (item && item.src ? "" : " is-empty") + (item && !item.src ? " is-titled" : "");
+          if (item && item.src) {
+            var img = document.createElement("img");
+            img.src = item.src;
+            img.alt = item.title || "";
+            fig.appendChild(img);
+          }
+          if (item && (item.title || item.by)) {
+            var cap = document.createElement("figcaption");
+            if (item.title) cap.appendChild(document.createTextNode(item.title));
+            if (item.by) {
+              var who = document.createElement("span");
+              who.textContent = item.by;
+              cap.appendChild(who);
+            }
+            fig.appendChild(cap);
+          }
+          grid.appendChild(fig);
+        }
+        root.appendChild(grid);
+      })();
+    </script>
+  </body>
+</html>
