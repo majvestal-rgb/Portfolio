@@ -8,18 +8,10 @@
     <script>
       try { localStorage.setItem("mv_aesthetic", "neo"); } catch (e) {}
     </script>
-    <script src="./theme.js?v=4"></script>
-    <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="./theme-neo.css?v=41" />
+    <script src="./theme.js?v=7"></script>
+    <link rel="stylesheet" href="./styles.css?v=3" />
+    <link rel="stylesheet" href="./theme-neo.css?v=46" />
     <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
-    <script>
-      (function () {
-        var m = sessionStorage.getItem("mv_portfolio");
-        if (m !== "full") {
-          window.location.replace(m === "locked" ? "misc.html" : "index.html");
-        }
-      })();
-    </script>
   </head>
   <body class="neo-landing">
     <div class="neo-home">
@@ -35,14 +27,16 @@
             <a href="contact.html">Contact</a>
           </nav>
           <div class="neo-player">
-            <img class="neo-player-skin" src="assets/player/leaf.png" alt="" />
-            <div class="neo-player-screen">
-              <p class="neo-player-kicker">Towa Tei</p>
-              <p class="neo-player-title">Luv Connection</p>
-              <p class="neo-player-time" id="neo-time">0:00</p>
+            <div class="neo-player-art">
+              <img class="neo-player-skin" src="assets/player/vine.png?v=4" alt="" />
+              <div class="neo-player-orb" aria-hidden="true"></div>
+              <div class="neo-player-screen">
+                <p class="neo-player-title">Luv connection</p>
+                <p class="neo-player-kicker">TOWA TEI</p>
+              </div>
+              <button type="button" id="neo-play" class="neo-player-play" aria-pressed="false" aria-label="Play"></button>
+              <audio id="neo-audio" src="assets/audio/Towa_Tei_-_Luv_Connection_(mp3.pm).mp3" loop preload="none"></audio>
             </div>
-            <button type="button" id="neo-play" class="neo-player-play" aria-pressed="false" aria-label="Play"></button>
-            <audio id="neo-audio" src="assets/audio/Towa_Tei_-_Luv_Connection_(mp3.pm).mp3" loop preload="none"></audio>
           </div>
         </div>
 
@@ -110,22 +104,13 @@
             audio.pause();
           }
         });
-        var time = document.getElementById("neo-time");
-        function clock(seconds) {
-          var s = Math.max(0, Math.floor(seconds || 0));
-          var m = Math.floor(s / 60);
-          s = s % 60;
-          return m + ":" + (s < 10 ? "0" : "") + s;
-        }
         function paint() {
           var on = !audio.paused;
           play.setAttribute("aria-pressed", on ? "true" : "false");
           play.setAttribute("aria-label", on ? "Pause" : "Play");
-          time.textContent = clock(audio.currentTime);
         }
         audio.addEventListener("play", paint);
         audio.addEventListener("pause", paint);
-        audio.addEventListener("timeupdate", paint);
 
         var KEY = "mv_guestbook";
         var list = document.getElementById("neo-guest-list");

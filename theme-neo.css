@@ -728,7 +728,7 @@ body.neo-landing {
   position: relative;
   box-sizing: border-box;
   min-height: 100vh;
-  padding: 22px clamp(56px, 9vw, 140px) 16px;
+  padding: 22px clamp(120px, 18vw, 320px) 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1131,74 +1131,103 @@ body.neo-landing {
 
 .neo-player {
   position: relative;
-  container-type: inline-size;
-  width: calc(100% - 12px);
-  margin: auto 6px 10px;
+  flex: none;
+  width: 100%;
+  margin: 0;
   padding: 0;
   border: 0;
-  background: transparent;
+  background: #000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   line-height: 0;
+}
+
+.neo-player-art {
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  aspect-ratio: 492 / 1436;
 }
 
 .neo-player-skin {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: fill;
+}
+
+.neo-player-orb {
+  position: absolute;
+  left: 13.21%;
+  top: 60.58%;
+  width: 75.2%;
+  height: 25.77%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.98) 0 6%, rgba(255, 255, 255, 0.28) 16%, transparent 30%),
+    radial-gradient(circle at 50% 62%, #fff4fb 0%, #f6c6ea 36%, #eea6dc 64%, #e08bcb 100%);
+  box-shadow: inset 0 -8px 14px rgba(196, 92, 168, 0.28);
+  pointer-events: none;
 }
 
 .neo-player-screen {
   position: absolute;
-  left: 21.5%;
-  top: 16.2%;
-  width: 47.5%;
-  height: 32%;
+  left: 13.21%;
+  top: 60.58%;
+  width: 75.2%;
+  height: 25.77%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.15em;
-  padding: 6% 7% 8%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
   overflow: hidden;
-  color: #d6ff3a;
-  font-family: "DotGothic16", Georgia, sans-serif;
-  font-size: 5.4cqw;
-  line-height: 1.15;
-  text-shadow: 0 0 4px rgba(180, 255, 50, 0.55);
+  color: #141414;
+  text-align: center;
   pointer-events: none;
 }
 
 .neo-player-play {
   position: absolute;
-  left: 37.2%;
-  top: 50.4%;
-  width: 14%;
-  height: 15.5%;
+  left: 13.21%;
+  top: 60.58%;
+  width: 75.2%;
+  height: 25.77%;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
-  cursor: var(--neo-cursor);
+  cursor: pointer;
 }
 
 .neo-player-play:focus-visible {
-  outline: 1px solid #d6ff3a;
-  outline-offset: 1px;
+  outline: 1px solid #141414;
+  outline-offset: -6px;
 }
 
 .neo-player-kicker,
-.neo-player-title,
-.neo-player-time {
+.neo-player-title {
   margin: 0;
 }
 
-.neo-player-kicker,
-.neo-player-time {
-  font-size: 0.82em;
+.neo-player-title {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 5.5cqw;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
 }
 
-.neo-player-title {
-  font-size: 1em;
+.neo-player-kicker {
+  font-family: "DotGothic16", "Courier New", monospace;
+  font-size: 3.3cqw;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .neo-side {
@@ -1518,7 +1547,7 @@ a.neo-ad:focus-visible {
 
   .neo-home {
     min-height: 100vh;
-    padding: 16px 28px 20px;
+    padding: 16px 56px 20px;
   }
 
   .neo-board {
@@ -1549,6 +1578,11 @@ a.neo-ad:focus-visible {
 
   .neo-side {
     height: auto;
+  }
+
+  .neo-player-art {
+    width: min(220px, 72%);
+    margin-inline: auto;
   }
 
   .neo-home-mark {

@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maj Vestal – Portfolio</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E" />
-    <script src="./theme.js?v=4"></script>
-    <link rel="stylesheet" href="./styles.css?v=2" />
+    <script>
+      try { localStorage.removeItem("mv_aesthetic"); } catch (e) {}
+    </script>
+    <script src="./theme.js?v=7"></script>
+    <link rel="stylesheet" href="./styles.css?v=3" />
     <link rel="stylesheet" href="./theme-neo.css?v=44" />
     <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
     <script>
@@ -14,9 +17,7 @@
         var MODE_KEY = "mv_portfolio";
         var mode = sessionStorage.getItem(MODE_KEY);
         if (mode === "full") {
-          var neo = false;
-          try { neo = localStorage.getItem("mv_aesthetic") === "neo"; } catch (e) {}
-          window.location.replace(neo ? "fun.html" : "work.html?p=1");
+          window.location.replace("work.html?p=1");
           return;
         }
         if (mode === "locked") {
@@ -51,9 +52,7 @@
           var v = (input.value || "").trim();
           if (v === PASS_FULL) {
             sessionStorage.setItem(MODE_KEY, "full");
-            var neo = false;
-            try { neo = localStorage.getItem("mv_aesthetic") === "neo"; } catch (e) {}
-            window.location.replace(neo ? "fun.html" : "work.html?p=1");
+            window.location.replace("work.html?p=1");
             return;
           }
           if (v === PASS_LOCKED) {

@@ -1,5 +1,24 @@
 (function () {
   var KEY = "mv_aesthetic";
+  var FUN_KEY = "mv_fun";
+  var PASS_FUN = "lilypad";
+
+  function isFunFile() {
+    var path = (location.pathname || "").split("/").pop().toLowerCase();
+    return /^(fun|paintings|sketchbook|writing|illustration|threed|library|library-music|library-books|library-movies|contact|cats)\.html$/.test(path);
+  }
+
+  function funOpen() {
+    try {
+      return sessionStorage.getItem(FUN_KEY) === "yes";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  if (isFunFile() && !funOpen()) {
+    document.documentElement.classList.add("mv-fun-lock");
+  }
 
   function read() {
     try {
@@ -52,14 +71,55 @@
   }
 
   var here = (location.pathname || "").toLowerCase();
-  if (read() === "neo" && here.endsWith("/info.html")) {
-    location.replace("fun.html");
-    return;
-  }
 
   apply(read());
 
+  function mountFunGate() {
+    if (!isFunFile() || funOpen()) {
+      document.documentElement.classList.remove("mv-fun-lock");
+      return;
+    }
+    if (document.querySelector(".fun-gate")) return;
+    var gate = document.createElement("div");
+    gate.className = "password-screen is-visible fun-gate";
+    gate.setAttribute("aria-label", "Fun mode password");
+    gate.innerHTML =
+      '<div class="password-screen-inner">' +
+      '<p class="password-screen-label">Password required</p>' +
+      '<form class="password-form" autocomplete="off">' +
+      '<input type="password" class="password-input" placeholder="Enter password" autocomplete="off" aria-label="Fun mode password" />' +
+      '<button type="submit" class="password-submit"><span class="password-submit-job">Enter</span><span class="password-submit-fun">ENTER HERE</span></button>' +
+      "</form>" +
+      '<p class="password-splash-line">CLICK TO ENTER.</p>' +
+      '<p class="password-error" aria-live="polite" hidden>Incorrect password</p>' +
+      '<button type="button" class="fun-gate-job">job mode</button>' +
+      "</div>";
+    document.body.appendChild(gate);
+    var form = gate.querySelector("form");
+    var input = gate.querySelector("input");
+    var error = gate.querySelector(".password-error");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if ((input.value || "").trim() === PASS_FUN) {
+        try { sessionStorage.setItem(FUN_KEY, "yes"); } catch (err) {}
+        write("neo");
+        apply("neo");
+        document.documentElement.classList.remove("mv-fun-lock");
+        gate.remove();
+        return;
+      }
+      error.hidden = false;
+      input.focus();
+    });
+    gate.querySelector(".fun-gate-job").addEventListener("click", function () {
+      write("clean");
+      window.location.href = "work.html?p=1";
+    });
+    input.focus();
+  }
+
   function mount() {
+    mountFunGate();
     if (!document.getElementById("aesthetic-toggle")) {
       var btn = document.createElement("button");
       btn.type = "button";
@@ -75,11 +135,12 @@
             : "neo";
         write(next);
         apply(next);
+        var onMisc = /(^|\/)misc\.html$/.test(here);
         if (next === "neo" && !funSite) {
           window.location.href = "fun.html";
           return;
         }
-        if (next === "clean" && funSite) {
+        if (next === "clean" && (funSite || onMisc)) {
           window.location.href = "work.html?p=1";
         }
       });

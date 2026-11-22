@@ -134,6 +134,27 @@
   display: none;
 }
 
+html.mv-fun-lock body > :not(.fun-gate) {
+  display: none !important;
+}
+
+.fun-gate-job {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #9a8f86;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+html[data-aesthetic="neo"] .fun-gate-job {
+  color: #dbeb88;
+  font-family: "DotGothic16", "Courier New", monospace;
+}
+
 *,
 *::before,
 *::after {

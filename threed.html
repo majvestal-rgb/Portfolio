@@ -8,18 +8,10 @@
     <script>
       try { localStorage.setItem("mv_aesthetic", "neo"); } catch (e) {}
     </script>
-    <script src="./theme.js?v=6"></script>
-    <link rel="stylesheet" href="./styles.css" />
+    <script src="./theme.js?v=7"></script>
+    <link rel="stylesheet" href="./styles.css?v=3" />
     <link rel="stylesheet" href="./theme-neo.css?v=24" />
     <link rel="stylesheet" href="https://use.typekit.net/cyu8ase.css" />
-    <script>
-      (function () {
-        var m = sessionStorage.getItem("mv_portfolio");
-        if (m !== "full") {
-          window.location.replace(m === "locked" ? "misc.html" : "index.html");
-        }
-      })();
-    </script>
   </head>
   <body class="neo-personal neo-shelf">
     <nav class="nav" aria-label="Leave this room">
@@ -41,8 +33,8 @@
         root.appendChild(heading);
         var grid = document.createElement("div");
         grid.className = "shelf-grid";
-        items.forEach(function (src) {
-          var name = decodeURIComponent(src.split("/").pop().replace(/\.[^.]+$/, "")).replace(/[_]+/g, " ");
+        items.forEach(function (src, i) {
+          var name = "render " + (i + 1);
           var fig = document.createElement("figure");
           fig.className = "shelf-item";
           var media;
